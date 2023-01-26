@@ -39,6 +39,7 @@ param_env_vars:
 
 param_usage_include_hostname: true
 param_hostname: "Kopia"
+param_hostname_desc: "Set hostname for the container."
 
 # optional container parameters
 opt_param_usage_include_env: false
