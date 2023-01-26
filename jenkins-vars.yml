@@ -1,0 +1,29 @@
+---
+
+# jenkins variables
+project_name: docker-kopia
+external_type: github_stable
+release_type: stable
+release_tag: latest
+ig_branch: main
+repo_vars:
+  - EXT_GIT_BRANCH = 'master'
+  - EXT_USER = 'kopia'
+  - EXT_REPO = 'kopia'
+  - BUILD_VERSION_ARG = 'KOPIA_VERSION'
+  - IG_USER = 'imagegenius'
+  - IG_REPO = 'docker-kopia'
+  - CONTAINER_NAME = 'kopia'
+  - DOCKERHUB_IMAGE = 'imagegenius/kopia'
+  - DEV_DOCKERHUB_IMAGE = 'igdev/kopia'
+  - PR_DOCKERHUB_IMAGE = 'igpipepr/kopia'
+  - DIST_IMAGE = 'alpine'
+  - MULTIARCH = 'true'
+  - CI = 'true'
+  - CI_WEB = 'true'
+  - CI_PORT = '51515'
+  - CI_SSL = 'false'
+  - CI_DELAY = '30'
+  - CI_DOCKERENV = ''
+  - CI_AUTH = ''
+  - CI_WEBPATH = ''
