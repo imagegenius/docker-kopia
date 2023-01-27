@@ -8,7 +8,7 @@ LABEL build_version="ImageGenius Version:- ${VERSION} Build-date:- ${BUILD_DATE}
 LABEL maintainer="hydazz"
 
 # environment settings
-ENV HOME="/tmp" \
+ENV HOME="/root" \
   KOPIA_CONFIG_PATH=/config/repository.config \
   KOPIA_LOG_DIR=/config/log \
   KOPIA_CACHE_DIRECTORY=/tmp \
@@ -19,12 +19,12 @@ ENV HOME="/tmp" \
 RUN \
   echo "**** install build packages ****" && \
   apk add --no-cache --virtual=build-dependencies \
-    make \
-    go && \
+    go \
+    make && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
-    rclone \
-    fuse3 && \
+    fuse3 \
+    rclone && \
   echo "**** download kopia ****" && \
   mkdir -p \
     /tmp/kopia && \
@@ -38,16 +38,19 @@ RUN \
   tar xf \
     /tmp/kopia.tar.gz -C \
     /tmp/kopia --strip-components=1 && \
+  echo "**** install kopia ****" && \
   cd /tmp/kopia && \
   make install && \
   mv \
-    /tmp/go/bin/kopia \
+    /root/go/bin/kopia \
     /app/kopia && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \
   rm -rf \
-    /tmp/*
+    /tmp/* \
+    /root/go/ \
+    /root/.cache
 
 ENV HOME="/config"
 
