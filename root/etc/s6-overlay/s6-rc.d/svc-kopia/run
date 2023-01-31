@@ -4,6 +4,7 @@
 exec s6-setuidgid abc \
 	/app/kopia server \
 	--insecure \
+	--disable-csrf-token-checks \
 	--address=0.0.0.0:51515 \
 	--server-username=${USERNAME:-kopia} \
 	--server-password=${PASSWORD:-kopia}

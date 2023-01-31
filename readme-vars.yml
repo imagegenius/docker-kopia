@@ -4,7 +4,7 @@
 project_name: kopia
 project_url: "https://kopia.io/"
 project_logo: "https://raw.githubusercontent.com/kopia/kopia/master/icons/kopia.svg"
-project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is a fast and secure open-source backup/restore tool that allows you to create encrypted snapshots of your data and save the snapshots to remote or cloud storage of your choice, to network-attached storage or server, or locally on your machine. Kopia does not 'image' your whole machine. Rather, Kopia allows you to backup/restore any and all files/directories that you deem are important or critical."
+project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}), Do not use!"
 project_github_repo_url: "https://github.com/imagegenius/docker-{{ project_name }}"
 
 # supported architectures
@@ -25,6 +25,7 @@ param_usage_include_vols: true
 param_volumes:
   - { vol_path: "/config", vol_host_path: "</path/to/appdata>", desc: "Appdata Path" }
   - { vol_path: "/source", vol_host_path: "</path/to/source>", desc: "Backup Source Path" }
+  - { vol_path: "/tmp", vol_host_path: "</path/to/uploads>", desc: "Temporary Uploads Path" }
 opt_param_usage_include_vols: true
 opt_param_volumes:
   - { vol_path: "/local", vol_host_path: "</path/to/local>", desc: "Path for local filesystem repositories" }
@@ -34,11 +35,11 @@ param_ports:
 param_usage_include_env: true
 param_env_vars:
   - { env_var: "USERNAME", env_value: "kopia", desc: "Specify a username to access the WebUI"}
-  - { env_var: "PASSWORD", env_value: "kopia", desc: "Specify a password to access the WebUI"}
+  - { env_var: "PASSWORD", env_value: "kopia", desc: "Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI"}
   - { env_var: "TZ", env_value: "Australia/Melbourne", desc: "Specify a timezone to use, eg. Australia/Melbourne"}
 
 param_usage_include_hostname: true
-param_hostname: "Kopia"
+param_hostname: "kopia"
 param_hostname_desc: "Set hostname for the container."
 
 # optional container parameters
