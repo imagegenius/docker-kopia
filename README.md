@@ -9,7 +9,7 @@
 [![Jenkins Build](https://img.shields.io/jenkins/build?labelColor=555555&logoColor=ffffff&style=for-the-badge&jobUrl=https%3A%2F%2Fci.imagegenius.io%2Fjob%2FDocker-Pipeline-Builders%2Fjob%2Fdocker-kopia%2Fjob%2Fmain%2F&logo=jenkins)](https://ci.imagegenius.io/job/Docker-Pipeline-Builders/job/docker-kopia/job/main/)
 [![IG CI](https://img.shields.io/badge/dynamic/yaml?color=007EC6&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Fci-tests.imagegenius.io%2Fimagegenius%2Fkopia%2Flatest-main%2Fci-status.yml)](https://ci-tests.imagegenius.io/imagegenius/kopia/latest-main/index.html)
 
-[Kopia](https://kopia.io/) is a fast and secure open-source backup/restore tool that allows you to create encrypted snapshots of your data and save the snapshots to remote or cloud storage of your choice, to network-attached storage or server, or locally on your machine. Kopia does not 'image' your whole machine. Rather, Kopia allows you to backup/restore any and all files/directories that you deem are important or critical.
+[Kopia](https://kopia.io/), Do not use!
 
 [![kopia](https://raw.githubusercontent.com/kopia/kopia/master/icons/kopia.svg)](https://kopia.io/)
 
@@ -51,7 +51,7 @@ services:
   kopia:
     image: ghcr.io/imagegenius/kopia:latest
     container_name: kopia
-    hostname: Kopia
+    hostname: kopia
     environment:
       - PUID=1000
       - PGID=1000
@@ -61,6 +61,7 @@ services:
     volumes:
       - </path/to/appdata>:/config
       - </path/to/source>:/source
+      - </path/to/uploads>:/tmp
       - </path/to/local>:/local #optional
     ports:
       - 51515:51515
@@ -72,7 +73,7 @@ services:
 ```bash
 docker run -d \
   --name=kopia \
-  --hostname=Kopia \
+  --hostname=kopia \
   -e PUID=1000 \
   -e PGID=1000 \
   -e USERNAME=kopia \
@@ -81,6 +82,7 @@ docker run -d \
   -p 51515:51515 \
   -v </path/to/appdata>:/config \
   -v </path/to/source>:/source \
+  -v </path/to/uploads>:/tmp \
   -v </path/to/local>:/local `#optional` \
   --restart unless-stopped \
   ghcr.io/imagegenius/kopia:latest
@@ -97,10 +99,11 @@ To configure the container, pass variables at runtime using the format `<externa
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e USERNAME=kopia` | Specify a username to access the WebUI |
-| `-e PASSWORD=kopia` | Specify a password to access the WebUI |
+| `-e PASSWORD=kopia` | Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI |
 | `-e TZ=Australia/Melbourne` | Specify a timezone to use, eg. Australia/Melbourne |
 | `-v /config` | Appdata Path |
 | `-v /source` | Backup Source Path |
+| `-v /tmp` | Temporary Uploads Path |
 | `-v /local` | Path for local filesystem repositories |
 
 ## Umask for running applications
