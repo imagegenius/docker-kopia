@@ -4,10 +4,8 @@
 
 [![GitHub Release](https://img.shields.io/github/release/imagegenius/docker-kopia.svg?color=007EC6&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/imagegenius/docker-kopia/releases)
 [![GitHub Package Repository](https://shields.io/badge/GitHub%20Package-blue?logo=github&logoColor=ffffff&style=for-the-badge)](https://github.com/imagegenius/docker-kopia/packages)
-[![Docker Hub](https://shields.io/badge/Docker%20Hub-blue?logo=docker&logoColor=ffffff&style=for-the-badge)](https://hub.docker.com/r/imagegenius/kopia)
-![Image Size](https://img.shields.io/docker/image-size/imagegenius/kopia/latest.svg?color=007EC6&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=docker)
 [![Jenkins Build](https://img.shields.io/jenkins/build?labelColor=555555&logoColor=ffffff&style=for-the-badge&jobUrl=https%3A%2F%2Fci.imagegenius.io%2Fjob%2FDocker-Pipeline-Builders%2Fjob%2Fdocker-kopia%2Fjob%2Fmain%2F&logo=jenkins)](https://ci.imagegenius.io/job/Docker-Pipeline-Builders/job/docker-kopia/job/main/)
-[![IG CI](https://img.shields.io/badge/dynamic/yaml?color=007EC6&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Fci-tests.imagegenius.io%2Fkopia%2Flatest-main%2Fci-status.yml)](https://ci-tests.imagegenius.io/imagegenius/kopia/latest-main/index.html)
+[![IG CI](https://img.shields.io/badge/dynamic/yaml?color=007EC6&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Fci-tests.imagegenius.io%2Fkopia%2Flatest-main%2Fci-status.yml)](https://ci-tests.imagegenius.io/kopia/latest-main/index.html)
 
 [Kopia](https://kopia.io/), Do not use!
 
@@ -25,6 +23,7 @@ This image supports the following architectures:
 | :----: | :----: | ---- |
 | x86-64 | ✅ | amd64-\<version tag\> |
 | arm64 | ✅ | arm64v8-\<version tag\> |
+| armhf | ❌ | |
 
 ## Version Tags
 
@@ -33,7 +32,6 @@ This image offers different versions via tags. Be cautious when using unstable o
 | Tag | Available | Description |
 | :----: | :----: |--- |
 | latest | ✅ | Latest Kopia release with an Alpine base. |
-
 ## Application Setup
 
 Image under development do not pull!
@@ -55,9 +53,9 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - TZ=Etc/UTC
       - USERNAME=kopia
       - PASSWORD=kopia
-      - TZ=Australia/Melbourne
     volumes:
       - </path/to/appdata>:/config
       - </path/to/source>:/source
@@ -76,9 +74,9 @@ docker run -d \
   --hostname=kopia \
   -e PUID=1000 \
   -e PGID=1000 \
+  -e TZ=Etc/UTC \
   -e USERNAME=kopia \
   -e PASSWORD=kopia \
-  -e TZ=Australia/Melbourne \
   -p 51515:51515 \
   -v </path/to/appdata>:/config \
   -v </path/to/source>:/source \
@@ -86,9 +84,10 @@ docker run -d \
   -v </path/to/local>:/local `#optional` \
   --restart unless-stopped \
   ghcr.io/imagegenius/kopia:latest
+
 ```
 
-## Container Variables
+## Variables
 
 To configure the container, pass variables at runtime using the format `<external>:<internal>`. For instance, `-p 8080:80` exposes port `80` inside the container, making it accessible outside the container via the host's IP on port `8080`.
 
@@ -98,9 +97,9 @@ To configure the container, pass variables at runtime using the format `<externa
 | `-p 51515` | WebUI Port: |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
+| `-e TZ=Etc/UTC` | specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
 | `-e USERNAME=kopia` | Specify a username to access the WebUI |
 | `-e PASSWORD=kopia` | Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI |
-| `-e TZ=Australia/Melbourne` | Specify a timezone to use, eg. Australia/Melbourne |
 | `-v /config` | Appdata Path |
 | `-v /source` | Backup Source Path |
 | `-v /tmp` | Temporary Uploads Path |
