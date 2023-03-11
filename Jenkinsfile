@@ -52,7 +52,7 @@ pipeline {
             returnStdout: true).trim()
           env.CODE_URL = 'https://github.com/' + env.IG_USER + '/' + env.IG_REPO + '/commit/' + env.GIT_COMMIT
           env.PULL_REQUEST = env.CHANGE_ID
-          env.TEMPLATED_FILES = 'Jenkinsfile README.md LICENSE .editorconfig  ./.github/workflows/external_trigger_scheduler.yml  ./.github/workflows/package_trigger_scheduler.yml  ./.github/workflows/external_trigger.yml ./.github/workflows/package_trigger.yml'
+          env.TEMPLATED_FILES = 'Jenkinsfile README.md LICENSE .editorconfig  ./.github/workflows/external_trigger_scheduler.yml  ./.github/workflows/package_trigger_scheduler.yml ./.github/workflows/call_invalid_helper.yml ./.github/workflows/permissions.yml ./.github/workflows/external_trigger.yml ./.github/workflows/package_trigger.yml'
         }
         script{
           env.IG_RELEASE_NUMBER = sh(
@@ -321,7 +321,7 @@ pipeline {
       }
       steps {
         echo "Running on node: ${NODE_NAME}"
-        sh "docker build \
+        sh "docker buildx build \
           --label \"org.opencontainers.image.created=${GITHUB_DATE}\" \
           --label \"org.opencontainers.image.authors=imagegenius.io\" \
           --label \"org.opencontainers.image.url=https://github.com/imagegenius/docker-kopia/packages\" \
@@ -333,7 +333,7 @@ pipeline {
           --label \"org.opencontainers.image.ref.name=${COMMIT_SHA}\" \
           --label \"org.opencontainers.image.title=Kopia\" \
           --label \"org.opencontainers.image.description=[Kopia](https://kopia.io/), Do not use!\" \
-          --no-cache --pull -t ${GITHUBIMAGE}:${META_TAG} \
+          --no-cache --pull -t ${GITHUBIMAGE}:${META_TAG} --platform=linux/amd64 \
           --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} ."
       }
     }
@@ -350,7 +350,7 @@ pipeline {
         stage('Build X86') {
           steps {
             echo "Running on node: ${NODE_NAME}"
-            sh "docker build \
+            sh "docker buildx build \
               --label \"org.opencontainers.image.created=${GITHUB_DATE}\" \
               --label \"org.opencontainers.image.authors=imagegenius.io\" \
               --label \"org.opencontainers.image.url=https://github.com/imagegenius/docker-kopia/packages\" \
@@ -362,7 +362,7 @@ pipeline {
               --label \"org.opencontainers.image.ref.name=${COMMIT_SHA}\" \
               --label \"org.opencontainers.image.title=Kopia\" \
               --label \"org.opencontainers.image.description=[Kopia](https://kopia.io/), Do not use!\" \
-              --no-cache --pull -t ${GITHUBIMAGE}:amd64-${META_TAG} \
+              --no-cache --pull -t ${GITHUBIMAGE}:amd64-${META_TAG} --platform=linux/amd64 \
               --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} ."
           }
         }
@@ -376,7 +376,7 @@ pipeline {
             sh '''#!/bin/bash
                   echo $GITHUB_TOKEN | docker login ghcr.io -u ImageGeniusCI --password-stdin
                '''
-            sh "docker build \
+            sh "docker buildx build \
               --label \"org.opencontainers.image.created=${GITHUB_DATE}\" \
               --label \"org.opencontainers.image.authors=imagegenius.io\" \
               --label \"org.opencontainers.image.url=https://github.com/imagegenius/docker-kopia/packages\" \
@@ -388,7 +388,7 @@ pipeline {
               --label \"org.opencontainers.image.ref.name=${COMMIT_SHA}\" \
               --label \"org.opencontainers.image.title=Kopia\" \
               --label \"org.opencontainers.image.description=[Kopia](https://kopia.io/), Do not use!\" \
-              --no-cache --pull -f Dockerfile.aarch64 -t ${GITHUBIMAGE}:arm64v8-${META_TAG} \
+              --no-cache --pull -f Dockerfile.aarch64 -t ${GITHUBIMAGE}:arm64v8-${META_TAG} --platform=linux/arm64 \
               --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} ."
             sh '''docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ghcr.io/imagegenius/igdev-buildcache:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER}
                   docker push ghcr.io/imagegenius/igdev-buildcache:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER}
@@ -416,26 +416,12 @@ pipeline {
               else
                 LOCAL_CONTAINER=${GITHUBIMAGE}:${META_TAG}
               fi
-              if [ "${DIST_IMAGE}" == "alpine" ]; then
-                docker run --rm --entrypoint '/bin/sh' -v ${TEMPDIR}:/tmp ${LOCAL_CONTAINER} -c '\
-                  apk info -v > /tmp/package_versions.txt && \
-                  sort -o /tmp/package_versions.txt  /tmp/package_versions.txt && \
-                  chmod 777 /tmp/package_versions.txt'
-              elif [ "${DIST_IMAGE}" == "ubuntu" ]; then
-                docker run --rm --entrypoint '/bin/sh' -v ${TEMPDIR}:/tmp ${LOCAL_CONTAINER} -c '\
-                  apt list -qq --installed | sed "s#/.*now ##g" | cut -d" " -f1 > /tmp/package_versions.txt && \
-                  sort -o /tmp/package_versions.txt  /tmp/package_versions.txt && \
-                  chmod 777 /tmp/package_versions.txt'
-              elif [ "${DIST_IMAGE}" == "fedora" ]; then
-                docker run --rm --entrypoint '/bin/sh' -v ${TEMPDIR}:/tmp ${LOCAL_CONTAINER} -c '\
-                  rpm -qa > /tmp/package_versions.txt && \
-                  sort -o /tmp/package_versions.txt  /tmp/package_versions.txt && \
-                  chmod 777 /tmp/package_versions.txt'
-              elif [ "${DIST_IMAGE}" == "arch" ]; then
-                docker run --rm --entrypoint '/bin/sh' -v ${TEMPDIR}:/tmp ${LOCAL_CONTAINER} -c '\
-                  pacman -Q > /tmp/package_versions.txt && \
-                  chmod 777 /tmp/package_versions.txt'
-              fi
+              touch ${TEMPDIR}/package_versions.txt
+              docker run --rm \
+                -v /var/run/docker.sock:/var/run/docker.sock:ro \
+                -v ${TEMPDIR}:/tmp \
+                ghcr.io/anchore/syft:latest \
+                ${LOCAL_CONTAINER} -o table=/tmp/package_versions.txt
               NEW_PACKAGE_TAG=$(md5sum ${TEMPDIR}/package_versions.txt | cut -c1-8 )
               echo "Package tag sha from current packages in buit container is ${NEW_PACKAGE_TAG} comparing to old ${PACKAGE_TAG} from github"
               if [ "${NEW_PACKAGE_TAG}" != "${PACKAGE_TAG}" ]; then
@@ -602,21 +588,25 @@ pipeline {
         sh '''#!/bin/bash
               set -e
               echo $GITHUB_TOKEN | docker login ghcr.io -u ImageGeniusCI --password-stdin
+              if [ "${CI}" == "false" ]; then
+                docker pull ghcr.io/imagegenius/igdev-buildcache:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER}
+                docker tag ghcr.io/imagegenius/igdev-buildcache:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER} ${GITHUBIMAGE}:arm64v8-${META_TAG}
+              fi
               docker tag ${GITHUBIMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:amd64-${META_TAG}
-              docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-${META_TAG}
               docker tag ${GITHUBIMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:amd64-latest
-              docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-latest
               docker tag ${GITHUBIMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:amd64-${EXT_RELEASE_TAG}
+              docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-${META_TAG}
+              docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-latest
               docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-${EXT_RELEASE_TAG}
               if [ -n "${SEMVER}" ]; then
-                docker tag ${GITHUBIMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:amd64-${SEMVER}
-                docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-${SEMVER}
+              docker tag ${GITHUBIMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:amd64-${SEMVER}
+              docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-${SEMVER}
               fi
               docker push ${GITHUBIMAGE}:amd64-${META_TAG}
-              docker push ${GITHUBIMAGE}:arm64v8-${META_TAG}
-              docker push ${GITHUBIMAGE}:amd64-latest
-              docker push ${GITHUBIMAGE}:arm64v8-latest
               docker push ${GITHUBIMAGE}:amd64-${EXT_RELEASE_TAG}
+              docker push ${GITHUBIMAGE}:amd64-latest
+              docker push ${GITHUBIMAGE}:arm64v8-${META_TAG}
+              docker push ${GITHUBIMAGE}:arm64v8-latest
               docker push ${GITHUBIMAGE}:arm64v8-${EXT_RELEASE_TAG}
               if [ -n "${SEMVER}" ]; then
                 docker push ${GITHUBIMAGE}:amd64-${SEMVER}
@@ -653,8 +643,8 @@ pipeline {
                 ${GITHUBIMAGE}:arm64v8-${EXT_RELEASE_TAG} || :
               if [ -n "${SEMVER}" ]; then
                 docker rmi \
-                ${GITHUBIMAGE}:amd64-${SEMVER} \
-                ${GITHUBIMAGE}:arm64v8-${SEMVER} || :
+                  ${GITHUBIMAGE}:amd64-${SEMVER} \
+                  ${GITHUBIMAGE}:arm64v8-${SEMVER} || :
               fi
               docker rmi \
                 ghcr.io/imagegenius/igdev-buildcache:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER} || :
@@ -714,13 +704,13 @@ pipeline {
           sh 'echo "build aborted"'
         }
         else if (currentBuild.currentResult == "SUCCESS"){
-          sh ''' curl -X POST -H "Content-Type: application/json" --data '{"avatar_url": "https://wiki.jenkins.io/JENKINS/attachments/2916393/57409617.png","embeds": [{"color": 1681177,\
-                 "description": "**'${IG_REPO}'**\\n**Build**  '${BUILD_NUMBER}'\\n**CI Results:**  '${CI_URL}'\\n**Status:**  Success\\n**Job:** '${RUN_DISPLAY_URL}'\\n**Change:** '${CODE_URL}'\\n**External Release:**: '${RELEASE_LINK}'\\n"}],\
+          sh ''' curl -X POST -H "Content-Type: application/json" --data '{"avatar_url": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jenkins-avatar.png","embeds": [{"color": 1681177,\
+                 "description": "**'${IG_REPO}' Build '${BUILD_NUMBER}' (main)**\\n**CI Results:**  '${CI_URL}'\\n**Job:** '${RUN_DISPLAY_URL}'\\n**Changes:** '${CODE_URL}'\\n**External Release:** '${RELEASE_LINK}'\\n"}],\
                  "username": "Jenkins"}' ${BUILDS_DISCORD} '''
         }
         else {
-          sh ''' curl -X POST -H "Content-Type: application/json" --data '{"avatar_url": "https://wiki.jenkins.io/JENKINS/attachments/2916393/57409617.png","embeds": [{"color": 16711680,\
-                 "description": "**'${IG_REPO}'**\\n**Build**  '${BUILD_NUMBER}'\\n**CI Results:**  '${CI_URL}'\\n**Status:**  Failure\\n**Job:** '${RUN_DISPLAY_URL}'\\n**Change:** '${CODE_URL}'\\n**External Release:**: '${RELEASE_LINK}'\\n"}],\
+          sh ''' curl -X POST -H "Content-Type: application/json" --data '{"avatar_url": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/jenkins-avatar.png","embeds": [{"color": 16711680,\
+                 "description": "**'${IG_REPO}' Build '${BUILD_NUMBER}' Failed! (main)**\\n**CI Results:**  '${CI_URL}'\\n**Job:** '${RUN_DISPLAY_URL}'\\n**Change:** '${CODE_URL}'\\n**External Release:** '${RELEASE_LINK}'\\n"}],\
                  "username": "Jenkins"}' ${BUILDS_DISCORD} '''
         }
       }
