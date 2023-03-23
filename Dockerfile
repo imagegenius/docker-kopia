@@ -43,7 +43,7 @@ RUN \
   make install && \
   mv \
     /root/go/bin/kopia \
-    /app/kopia && \
+    /usr/local/bin/kopia && \
   echo "**** cleanup ****" && \
   apk del --purge \
     build-dependencies && \
