@@ -144,5 +144,6 @@ Instructions for updating containers:
 
 ## Versions
 
+* **23.03.23:** - add fuse package
 * **21.03.23:** - Add service checks
 * **26.01.23:** - Initial release.
