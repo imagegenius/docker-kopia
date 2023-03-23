@@ -59,5 +59,6 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "23.03.23:", desc: "add fuse package" }
   - { date: "21.03.23:", desc: "Add service checks" }
   - { date: "26.01.23:", desc: "Initial release." }
