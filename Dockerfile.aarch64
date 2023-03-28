@@ -9,8 +9,7 @@ LABEL build_version="ImageGenius Version:- ${VERSION} Build-date:- ${BUILD_DATE}
 LABEL maintainer="hydazz"
 
 # environment settings
-ENV HOME="/root" \
-  KOPIA_CONFIG_PATH=/config/repository.config \
+ENV KOPIA_CONFIG_PATH=/config/repository.config \
   KOPIA_LOG_DIR=/config/log \
   KOPIA_CACHE_DIRECTORY=/tmp \
   RCLONE_CONFIG=/config/rclone.conf \
@@ -53,8 +52,6 @@ RUN \
     /tmp/* \
     /root/go/ \
     /root/.cache
-
-ENV HOME="/config"
 
 # copy local files
 COPY root/ /

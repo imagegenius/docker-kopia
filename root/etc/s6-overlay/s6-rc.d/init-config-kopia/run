@@ -1,12 +1,11 @@
 #!/usr/bin/with-contenv bash
-# shellcheck shell=bash
 
 touch /config/rclone.conf
 
 # make folders
 mkdir -p \
-	/config/log/
+    /config/log/
 
 # permissions
 chown -R abc:abc \
-	/config
+    /config

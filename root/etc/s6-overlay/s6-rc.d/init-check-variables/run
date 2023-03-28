@@ -1,13 +1,13 @@
 #!/usr/bin/with-contenv bash
-# shellcheck shell=bash
 
 VARIABLES=("USERNAME" "PASSWORD")
 MESSAGES=("No username has been specified in the USERNAME variable."
 "No password has been specified in the PASSWORD variable.")
 
 for i in ${!VARIABLES[@]}; do
-	if [ -z "${!VARIABLES[$i]}" ]; then
-		echo "Error: ${MESSAGES[$i]}"
-		sleep infinity
-	fi
+    if [ -z "${!VARIABLES[$i]}" ]; then
+        echo "Error: ${MESSAGES[$i]}"
+        echo "See the readme for more information: https://github.com/imagegenius/docker-kopia#variables"
+        sleep infinity
+    fi
 done
