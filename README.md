@@ -25,13 +25,6 @@ This image supports the following architectures:
 | arm64 | ✅ | arm64v8-\<version tag\> |
 | armhf | ❌ | |
 
-## Version Tags
-
-This image offers different versions via tags. Be cautious when using unstable or development tags, and read their descriptions carefully.
-
-| Tag | Available | Description |
-| :----: | :----: |--- |
-| latest | ✅ | Latest Kopia release with an Alpine base. |
 ## Usage
 
 Example snippets to start creating a container:
@@ -140,6 +133,7 @@ Instructions for updating containers:
 
 ## Versions
 
+* **28.03.23:** - set home in service
 * **23.03.23:** - add fuse package
 * **21.03.23:** - Add service checks
 * **26.01.23:** - Initial release.
