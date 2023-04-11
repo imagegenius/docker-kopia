@@ -22,7 +22,6 @@ RUN \
     make && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
-    fuse \
     fuse3 \
     rclone && \
   echo "**** download kopia ****" && \
@@ -57,4 +56,4 @@ COPY root/ /
 
 # ports and volumes
 EXPOSE 51515
-VOLUME /config /source /backups
+VOLUME /config /source /backups /tmp

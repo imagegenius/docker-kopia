@@ -22,7 +22,7 @@ param_usage_include_vols: true
 param_volumes:
   - { vol_path: "/config", vol_host_path: "</path/to/appdata>", desc: "Appdata Path" }
   - { vol_path: "/source", vol_host_path: "</path/to/source>", desc: "Backup Source Path" }
-  - { vol_path: "/tmp", vol_host_path: "</path/to/uploads>", desc: "Temporary Uploads Path" }
+  - { vol_path: "/tmp", vol_host_path: "</path/to/uploads>", desc: "Temporary Uploads Path (Cache)" }
 opt_param_usage_include_vols: true
 opt_param_volumes:
   - { vol_path: "/local", vol_host_path: "</path/to/local>", desc: "Path for local filesystem repositories" }
@@ -33,7 +33,12 @@ param_usage_include_env: true
 param_env_vars:
   - { env_var: "USERNAME", env_value: "kopia", desc: "Specify a username to access the WebUI"}
   - { env_var: "PASSWORD", env_value: "kopia", desc: "Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI"}
-  - { env_var: "TZ", env_value: "Australia/Melbourne", desc: "Specify a timezone to use, eg. Australia/Melbourne"}
+param_device_map: true
+param_devices:
+  - { device_path: "/dev/fuse", device_host_path: "/dev/fuse", desc: "Allows fuse mounts to function" }
+cap_add_param: true
+cap_add_param_vars:
+  - { cap_add_var: "SYS_ADMIN" }
 
 param_usage_include_hostname: true
 param_hostname: "kopia"
@@ -55,6 +60,7 @@ app_setup_block: ""
 
 # changelog
 changelogs:
+  - { date: "11.04.23:", desc: "set home in service" }
   - { date: "28.03.23:", desc: "set home in service" }
   - { date: "23.03.23:", desc: "add fuse package" }
   - { date: "21.03.23:", desc: "Add service checks" }

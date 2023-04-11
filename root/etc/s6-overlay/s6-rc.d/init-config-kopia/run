@@ -1,11 +1,12 @@
 #!/usr/bin/with-contenv bash
 
-touch /config/rclone.conf
-
 # make folders
 mkdir -p \
-    /config/log/
+    /config/log
+
+touch /config/rclone.conf
 
 # permissions
 chown -R abc:abc \
-    /config
+    /config \
+    /tmp
