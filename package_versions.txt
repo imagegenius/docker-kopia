@@ -19,7 +19,6 @@ cloud.google.com/go/iam                               v0.13.0                   
 cloud.google.com/go/storage                           v1.30.1                               go-module  
 coreutils                                             9.1-r0                                apk        
 curl                                                  7.88.1-r1                             apk        
-fuse                                                  2.9.9-r2                              apk        
 fuse-common                                           3.12.0-r0                             apk        
 fuse3                                                 3.12.0-r0                             apk        
 fuse3-libs                                            3.12.0-r0                             apk        
