@@ -39,6 +39,8 @@ services:
     image: ghcr.io/imagegenius/kopia:latest
     container_name: kopia
     hostname: kopia
+    cap_add:
+      - SYS_ADMIN
     environment:
       - PUID=1000
       - PGID=1000
@@ -52,6 +54,8 @@ services:
       - </path/to/local>:/local #optional
     ports:
       - 51515:51515
+    devices:
+      - /dev/fuse:/dev/fuse
     restart: unless-stopped
 ```
 
@@ -61,6 +65,7 @@ services:
 docker run -d \
   --name=kopia \
   --hostname=kopia \
+  --cap-add=SYS_ADMIN \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Etc/UTC \
@@ -71,6 +76,7 @@ docker run -d \
   -v </path/to/source>:/source \
   -v </path/to/uploads>:/tmp \
   -v </path/to/local>:/local `#optional` \
+  --device /dev/fuse:/dev/fuse \
   --restart unless-stopped \
   ghcr.io/imagegenius/kopia:latest
 
@@ -91,8 +97,9 @@ To configure the container, pass variables at runtime using the format `<externa
 | `-e PASSWORD=kopia` | Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI |
 | `-v /config` | Appdata Path |
 | `-v /source` | Backup Source Path |
-| `-v /tmp` | Temporary Uploads Path |
+| `-v /tmp` | Temporary Uploads Path (Cache) |
 | `-v /local` | Path for local filesystem repositories |
+| `--device /dev/fuse` | Allows fuse mounts to function |
 
 ## Umask for running applications
 
@@ -133,6 +140,7 @@ Instructions for updating containers:
 
 ## Versions
 
+* **11.04.23:** - set home in service
 * **28.03.23:** - set home in service
 * **23.03.23:** - add fuse package
 * **21.03.23:** - Add service checks
