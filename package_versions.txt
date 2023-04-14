@@ -236,7 +236,7 @@ netcat-openbsd                                        1.130-r4                  
 nghttp2-libs                                          1.51.0-r0                             apk        
 oniguruma                                             6.9.8-r0                              apk        
 procps                                                3.3.17-r2                             apk        
-rclone                                                1.60.1-r2                             apk        
+rclone                                                1.60.1-r3                             apk        
 readline                                              8.2.0-r0                              apk        
 scanelf                                               1.3.5-r1                              apk        
 shadow                                                4.13-r0                               apk        
