@@ -50,7 +50,7 @@ services:
     volumes:
       - </path/to/appdata>:/config
       - </path/to/source>:/source
-      - </path/to/uploads>:/tmp
+      - </path/to/uploads>:/cache
       - </path/to/local>:/local #optional
     ports:
       - 51515:51515
@@ -74,7 +74,7 @@ docker run -d \
   -p 51515:51515 \
   -v </path/to/appdata>:/config \
   -v </path/to/source>:/source \
-  -v </path/to/uploads>:/tmp \
+  -v </path/to/uploads>:/cache \
   -v </path/to/local>:/local `#optional` \
   --device /dev/fuse:/dev/fuse \
   --restart unless-stopped \
@@ -97,7 +97,7 @@ To configure the container, pass variables at runtime using the format `<externa
 | `-e PASSWORD=kopia` | Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI |
 | `-v /config` | Appdata Path |
 | `-v /source` | Backup Source Path |
-| `-v /tmp` | Temporary Uploads Path (Cache) |
+| `-v /cache` | Temporary Uploads Path (Cache) |
 | `-v /local` | Path for local filesystem repositories |
 | `--device /dev/fuse` | Allows fuse mounts to function |
 
@@ -140,7 +140,8 @@ Instructions for updating containers:
 
 ## Versions
 
-* **11.04.23:** - set home in service
+* **14.04.23:** - BREAKING: move cache from /tmp to /cache.
+* **11.04.23:** - fix run script ('kopia server' to 'kopia server start')
 * **28.03.23:** - set home in service
 * **23.03.23:** - add fuse package
 * **21.03.23:** - Add service checks
