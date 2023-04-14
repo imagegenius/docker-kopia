@@ -1,5 +1,10 @@
 #!/usr/bin/with-contenv bash
 
+if [ ! -d /cache ]; then
+    echo "WARN: Please modify your cache volume mount from '/tmp' to '/cache'"
+    sleep infinity
+fi
+
 # make folders
 mkdir -p \
     /config/log
@@ -9,4 +14,4 @@ touch /config/rclone.conf
 # permissions
 chown -R abc:abc \
     /config \
-    /tmp
+    /cache

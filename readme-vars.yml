@@ -22,7 +22,7 @@ param_usage_include_vols: true
 param_volumes:
   - { vol_path: "/config", vol_host_path: "</path/to/appdata>", desc: "Appdata Path" }
   - { vol_path: "/source", vol_host_path: "</path/to/source>", desc: "Backup Source Path" }
-  - { vol_path: "/tmp", vol_host_path: "</path/to/uploads>", desc: "Temporary Uploads Path (Cache)" }
+  - { vol_path: "/cache", vol_host_path: "</path/to/uploads>", desc: "Temporary Uploads Path (Cache)" }
 opt_param_usage_include_vols: true
 opt_param_volumes:
   - { vol_path: "/local", vol_host_path: "</path/to/local>", desc: "Path for local filesystem repositories" }
@@ -60,7 +60,8 @@ app_setup_block: ""
 
 # changelog
 changelogs:
-  - { date: "11.04.23:", desc: "set home in service" }
+  - { date: "14.04.23:", desc: "BREAKING: move cache from /tmp to /cache." }
+  - { date: "11.04.23:", desc: "fix run script ('kopia server' to 'kopia server start')" }
   - { date: "28.03.23:", desc: "set home in service" }
   - { date: "23.03.23:", desc: "add fuse package" }
   - { date: "21.03.23:", desc: "Add service checks" }
