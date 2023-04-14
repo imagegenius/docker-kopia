@@ -11,7 +11,7 @@ LABEL maintainer="hydazz"
 # environment settings
 ENV KOPIA_CONFIG_PATH=/config/repository.config \
   KOPIA_LOG_DIR=/config/log \
-  KOPIA_CACHE_DIRECTORY=/tmp \
+  KOPIA_CACHE_DIRECTORY=/cache \
   RCLONE_CONFIG=/config/rclone.conf \
   KOPIA_PERSIST_CREDENTIALS_ON_CONNECT=true \
   KOPIA_CHECK_FOR_UPDATES=false
@@ -57,4 +57,4 @@ COPY root/ /
 
 # ports and volumes
 EXPOSE 51515
-VOLUME /config /source /backups /tmp
+VOLUME /config /source /backups /cache

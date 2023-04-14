@@ -1,5 +1,10 @@
 #!/usr/bin/with-contenv bash
 
+if [ -f /tmp/kopia.repository ]; then
+    echo "WARN: Please modify your cache volume mount from '/tmp' to '/cache'!"
+    export KOPIA_CACHE_DIRECTORY=/tmp
+fi
+
 export HOME=/config
 
 exec \

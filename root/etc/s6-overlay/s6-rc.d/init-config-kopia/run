@@ -9,4 +9,4 @@ touch /config/rclone.conf
 # permissions
 chown -R abc:abc \
     /config \
-    /tmp
+    /cache
