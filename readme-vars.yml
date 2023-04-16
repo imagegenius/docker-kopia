@@ -9,8 +9,8 @@ project_github_repo_url: "https://github.com/imagegenius/docker-{{ project_name 
 
 # supported architectures
 available_architectures:
-  - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
-  - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
+  - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest" }
+  - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest" }
 
 # development version
 development_versions: false
@@ -28,11 +28,11 @@ opt_param_volumes:
   - { vol_path: "/local", vol_host_path: "</path/to/local>", desc: "Path for local filesystem repositories" }
 param_usage_include_ports: true
 param_ports:
-  - { external_port: "51515", internal_port: "51515", port_desc: "WebUI Port:" }
+  - { external_port: "51515", internal_port: "51515", port_desc: "WebUI Port" }
 param_usage_include_env: true
 param_env_vars:
-  - { env_var: "USERNAME", env_value: "kopia", desc: "Specify a username to access the WebUI"}
-  - { env_var: "PASSWORD", env_value: "kopia", desc: "Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI"}
+  - { env_var: "USERNAME", env_value: "kopia", desc: "Specify a username to access the WebUI" }
+  - { env_var: "PASSWORD", env_value: "kopia", desc: "Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI" }
 param_device_map: true
 param_devices:
   - { device_path: "/dev/fuse", device_host_path: "/dev/fuse", desc: "Allows fuse mounts to function" }
@@ -45,7 +45,9 @@ param_hostname: "kopia"
 param_hostname_desc: "Set hostname for the container."
 
 # optional container parameters
-opt_param_usage_include_env: false
+opt_param_usage_include_env: true
+opt_param_env_vars:
+  - { env_var: "KOPIA_PERSIST_CREDENTIALS_ON_CONNECT", env_value: "true", desc: "Automatically connect to repository" }
 
 # optional parameters
 optional_block_1: false
