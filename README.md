@@ -47,6 +47,7 @@ services:
       - TZ=Etc/UTC
       - USERNAME=kopia
       - PASSWORD=kopia
+      - KOPIA_PERSIST_CREDENTIALS_ON_CONNECT=true #optional
     volumes:
       - </path/to/appdata>:/config
       - </path/to/source>:/source
@@ -71,6 +72,7 @@ docker run -d \
   -e TZ=Etc/UTC \
   -e USERNAME=kopia \
   -e PASSWORD=kopia \
+  -e KOPIA_PERSIST_CREDENTIALS_ON_CONNECT=true `#optional` \
   -p 51515:51515 \
   -v </path/to/appdata>:/config \
   -v </path/to/source>:/source \
@@ -89,12 +91,13 @@ To configure the container, pass variables at runtime using the format `<externa
 | Variable | Description |
 | :----: | --- |
 | `--hostname=` | Set hostname for the container. |
-| `-p 51515` | WebUI Port: |
+| `-p 51515` | WebUI Port |
 | `-e PUID=1000` | UID for permissions - see below for explanation |
 | `-e PGID=1000` | GID for permissions - see below for explanation |
 | `-e TZ=Etc/UTC` | Specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
 | `-e USERNAME=kopia` | Specify a username to access the WebUI |
 | `-e PASSWORD=kopia` | Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI |
+| `-e KOPIA_PERSIST_CREDENTIALS_ON_CONNECT=true` | Automatically connect to repository |
 | `-v /config` | Appdata Path |
 | `-v /source` | Backup Source Path |
 | `-v /cache` | Temporary Uploads Path (Cache) |
