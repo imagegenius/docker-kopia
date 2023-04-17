@@ -125,7 +125,7 @@ github.com/mattn/go-runewidth                         v0.0.13                   
 github.com/matttproud/golang_protobuf_extensions      v1.0.1                                go-module  
 github.com/matttproud/golang_protobuf_extensions      v1.0.4                                go-module  
 github.com/minio/md5-simd                             v1.1.2                                go-module  
-github.com/minio/minio-go/v7                          v7.0.51                               go-module  
+github.com/minio/minio-go/v7                          v7.0.52                               go-module  
 github.com/minio/sha256-simd                          v1.0.0                                go-module  
 github.com/mitchellh/go-homedir                       v1.1.0                                go-module  
 github.com/modern-go/concurrent                       v0.0.0-20180306012644-bacd9c7ef1dd    go-module  
@@ -143,13 +143,13 @@ github.com/pkg/sftp                                   v1.13.5                   
 github.com/pkg/xattr                                  v0.4.7                                go-module  
 github.com/pquerna/ffjson                             v0.0.0-20190930134022-aa0246cd15f7    go-module  
 github.com/prometheus/client_golang                   v1.12.2                               go-module  
-github.com/prometheus/client_golang                   v1.14.0                               go-module  
+github.com/prometheus/client_golang                   v1.15.0                               go-module  
 github.com/prometheus/client_model                    v0.2.0                                go-module  
 github.com/prometheus/client_model                    v0.3.0                                go-module  
 github.com/prometheus/common                          v0.32.1                               go-module  
 github.com/prometheus/common                          v0.42.0                               go-module  
 github.com/prometheus/procfs                          v0.7.3                                go-module  
-github.com/prometheus/procfs                          v0.8.0                                go-module  
+github.com/prometheus/procfs                          v0.9.0                                go-module  
 github.com/putdotio/go-putio/putio                    v0.0.0-20200123120452-16d982cac2b8    go-module  
 github.com/rclone/ftp                                 v0.0.0-20221014110213-e44dedbc76c6    go-module  
 github.com/rclone/rclone                              (devel)                               go-module  
@@ -204,7 +204,7 @@ golang.org/x/text                                     v0.3.7                    
 golang.org/x/text                                     v0.9.0                                go-module  
 golang.org/x/time                                     v0.0.0-20220722155302-e5dcc9cfc0b9    go-module  
 golang.org/x/xerrors                                  v0.0.0-20220907171357-04be3eba64a2    go-module  
-google.golang.org/api                                 v0.117.0                              go-module  
+google.golang.org/api                                 v0.118.0                              go-module  
 google.golang.org/api                                 v0.91.0                               go-module  
 google.golang.org/appengine                           v1.6.7                                go-module  
 google.golang.org/genproto                            v0.0.0-20220624142145-8cd45d7dbd1f    go-module  
