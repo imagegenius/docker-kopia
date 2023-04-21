@@ -48,6 +48,7 @@ param_hostname_desc: "Set hostname for the container."
 opt_param_usage_include_env: true
 opt_param_env_vars:
   - { env_var: "KOPIA_PERSIST_CREDENTIALS_ON_CONNECT", env_value: "true", desc: "Automatically connect to repository" }
+  - { env_var: "CLI_ARGS", env_value: "", desc: "Overwrite CLI arguments" }
 
 # optional parameters
 optional_block_1: false
@@ -57,11 +58,41 @@ optional_block_1_items: ""
 unraid_category: "Backup: Cloud: Network:Other Productivity: Tools:"
 
 # application setup block
-app_setup_block_enabled: false
-app_setup_block: ""
+app_setup_block_enabled: true
+app_setup_block: |
+  The WebUI can be found at `http://your-ip:51515`. Login with the username and password specified in the `USERNAME` and `PASSWORD` variables.
+
+  By default, Kopia will be started with the following configuration:
+
+  ```bash
+  kopia server start \
+    --insecure \
+    --disable-csrf-token-checks \
+    --address=0.0.0.0:51515 \
+    --server-username=${USERNAME} \
+    --server-password=${PASSWORD}
+  ```
+
+  This can be easily overwritten by specifying startup parameters in the `CLI_ARGS` variable, which will overwrite everything after the `kopia` command, eg:
+
+  `CLI_ARGS=`
+  ```bash
+  server start \
+    --disable-csrf-token-checks \
+    --tls-cert-file=/config/ssl/fullchain.pem \
+    --tls-key-file=/config/ssl/privkey.pem \
+    --address=0.0.0.0:51515 \
+    --server-username=kopia \
+    --server-password=kopia
+  ```
+
+  **When specifying `CLI_ARGS`, they must be on a single line.**
+
+  If you have entered invalid `CLI_ARGS`, Kopia will not start (see the logs if this happens).
 
 # changelog
 changelogs:
+  - { date: "21.04.23:", desc: "Add `CLI_ARGS` variable." }
   - { date: "14.04.23:", desc: "BREAKING: move cache from /tmp to /cache." }
   - { date: "11.04.23:", desc: "fix run script ('kopia server' to 'kopia server start')" }
   - { date: "28.03.23:", desc: "set home in service" }

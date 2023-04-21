@@ -7,12 +7,26 @@ fi
 
 export HOME=/config
 
-exec \
+if [ -z "${CLI_ARGS}" ]; then
+    exec \
+        s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z 127.0.0.1 51515" \
+            s6-setuidgid abc \
+                kopia server start \
+                    --insecure \
+                    --disable-csrf-token-checks \
+                    --address=0.0.0.0:51515 \
+                    --server-username=${USERNAME:-kopia} \
+                    --server-password=${PASSWORD:-kopia}
+else
+    echo "Running Kopia with the specified 'CLI_ARGS' ('kopia ${CLI_ARGS}')."
+
     s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z 127.0.0.1 51515" \
         s6-setuidgid abc \
-            kopia server start \
-                --insecure \
-                --disable-csrf-token-checks \
-                --address=0.0.0.0:51515 \
-                --server-username=${USERNAME:-kopia} \
-                --server-password=${PASSWORD:-kopia}
+            kopia "${CLI_ARGS}"
+
+    CODE=$?
+    if [ ${CODE} != "0" ]; then
+        echo "Kopia failed to start with the specified 'CLI_ARGS'."
+        sleep infinity
+    fi
+fi
