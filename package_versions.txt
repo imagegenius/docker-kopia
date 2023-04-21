@@ -18,7 +18,7 @@ cloud.google.com/go/compute/metadata                  v0.2.3                    
 cloud.google.com/go/iam                               v0.13.0                               go-module  
 cloud.google.com/go/storage                           v1.30.1                               go-module  
 coreutils                                             9.1-r0                                apk        
-curl                                                  7.88.1-r1                             apk        
+curl                                                  8.0.1-r0                              apk        
 fuse-common                                           3.12.0-r0                             apk        
 fuse3                                                 3.12.0-r0                             apk        
 fuse3-libs                                            3.12.0-r0                             apk        
@@ -222,7 +222,7 @@ libattr                                               2.5.1-r2                  
 libbsd                                                0.11.7-r0                             apk        
 libc-utils                                            0.7.2-r3                              apk        
 libcrypto3                                            3.0.8-r3                              apk        
-libcurl                                               7.88.1-r1                             apk        
+libcurl                                               8.0.1-r0                              apk        
 libintl                                               0.21.1-r1                             apk        
 libmd                                                 1.0.4-r0                              apk        
 libproc                                               3.3.17-r2                             apk        
