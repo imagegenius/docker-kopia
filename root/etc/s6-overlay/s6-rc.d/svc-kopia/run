@@ -1,6 +1,12 @@
 #!/usr/bin/with-contenv bash
 
-if [ -f /tmp/kopia.repository ]; then
+start_kopia() {
+    s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z 127.0.0.1 51515" \
+        s6-setuidgid abc \
+            kopia "$@"
+}
+
+if [ -f "/tmp/kopia.repository" ]; then
     echo "WARN: Please modify your cache volume mount from '/tmp' to '/cache'!"
     export KOPIA_CACHE_DIRECTORY=/tmp
 fi
@@ -8,19 +14,12 @@ fi
 export HOME=/config
 
 if [ -z "${CLI_ARGS}" ]; then
-    exec \
-        s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z 127.0.0.1 51515" \
-            s6-setuidgid abc \
-                kopia server start \
-                    --insecure \
-                    --disable-csrf-token-checks \
-                    --address=0.0.0.0:51515 \
-                    --server-username=${USERNAME:-kopia} \
-                    --server-password=${PASSWORD:-kopia}
+    start_kopia server start \
+        --insecure \
+        --disable-csrf-token-checks \
+        --address=0.0.0.0:51515 \
+        --htpasswd-file "/config/htpasswd"
 else
     echo "Running Kopia with the specified 'CLI_ARGS'."
-    exec \
-        s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z 127.0.0.1 51515" \
-            s6-setuidgid abc \
-                kopia "${CLI_ARGS}"
+    start_kopia "${CLI_ARGS}"
 fi

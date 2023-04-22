@@ -31,8 +31,8 @@ param_ports:
   - { external_port: "51515", internal_port: "51515", port_desc: "WebUI Port" }
 param_usage_include_env: true
 param_env_vars:
-  - { env_var: "USERNAME", env_value: "kopia", desc: "Specify a username to access the WebUI" }
-  - { env_var: "PASSWORD", env_value: "kopia", desc: "Specify a password to access the WebUI" }
+  - { env_var: "USERNAME", env_value: "kopia", desc: "Specify a username to access the WebUI, this can be removed after first setup" }
+  - { env_var: "PASSWORD", env_value: "kopia", desc: "Specify a password to access the WebUI, this can be removed after first setup" }
 param_device_map: true
 param_devices:
   - { device_path: "/dev/fuse", device_host_path: "/dev/fuse", desc: "Allows fuse mounts to function" }
@@ -62,6 +62,10 @@ app_setup_block_enabled: true
 app_setup_block: |
   The WebUI can be found at `http://your-ip:51515`. Login with the username and password specified in the `USERNAME` and `PASSWORD` variables.
 
+  The `htpasswd` file is automatically generated on startup (if it does not exist) with the specified username/password in the variables.
+
+  After this file has been generated, the `USERNAME`/`PASSWORD` variables can be removed, and the `htpasswd` file can be modified with the `htpasswd` command as desired.
+
   By default, Kopia will be started with the following configuration:
 
   ```bash
@@ -69,10 +73,8 @@ app_setup_block: |
     --insecure \
     --disable-csrf-token-checks \
     --address=0.0.0.0:51515 \
-    --server-username=${USERNAME} \
-    --server-password=${PASSWORD}
+    --htpasswd-file /config/htpasswd
   ```
-
   This can be easily overwritten by specifying startup parameters in the `CLI_ARGS` variable, which will overwrite everything after the `kopia` command, eg:
 
   `CLI_ARGS=`
@@ -92,6 +94,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "22.04.23:", desc: "use `htpasswd` file." }
   - { date: "21.04.23:", desc: "Add `CLI_ARGS` variable." }
   - { date: "14.04.23:", desc: "BREAKING: move cache from /tmp to /cache." }
   - { date: "11.04.23:", desc: "fix run script ('kopia server' to 'kopia server start')" }

@@ -6,6 +6,16 @@ mkdir -p \
 
 touch /config/rclone.conf
 
+if [ ! -f /config/htpasswd ] && [ -n "${USERNAME}" ] && [ -n "${PASSWORD}" ]; then
+    echo "Generating the htpasswd file with the specified 'USERNAME' and 'PASSWORD'."
+    htpasswd -cb /config/htpasswd "${USERNAME}" "${PASSWORD}"
+elif [ ! -f /config/htpasswd ]; then
+    echo "ERROR: No username or password has been specified in the 'USERNAME' or 'PASSWORD' variables."
+    sleep infinity
+elif [ -n "${USERNAME}" ] || [ -n "${PASSWORD}" ]; then
+    echo "WARN: Please remove the 'USERNAME' and 'PASSWORD' variables for security, they are no longer needed!"
+fi
+
 # permissions
 chown -R abc:abc \
     /config \
