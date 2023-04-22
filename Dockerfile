@@ -22,6 +22,7 @@ RUN \
     make && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
+    apache2-utils \
     fuse3 \
     rclone && \
   echo "**** download kopia ****" && \
