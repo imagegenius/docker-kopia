@@ -25,6 +25,38 @@ This image supports the following architectures:
 | arm64 | ✅ | arm64v8-\<version tag\> |
 | armhf | ❌ | |
 
+## Application Setup
+
+The WebUI can be found at `http://your-ip:51515`. Login with the username and password specified in the `USERNAME` and `PASSWORD` variables.
+
+By default, Kopia will be started with the following configuration:
+
+```bash
+kopia server start \
+  --insecure \
+  --disable-csrf-token-checks \
+  --address=0.0.0.0:51515 \
+  --server-username=${USERNAME} \
+  --server-password=${PASSWORD}
+```
+
+This can be easily overwritten by specifying startup parameters in the `CLI_ARGS` variable, which will overwrite everything after the `kopia` command, eg:
+
+`CLI_ARGS=`
+```bash
+server start \
+  --disable-csrf-token-checks \
+  --tls-cert-file=/config/keys/fullchain.pem \
+  --tls-key-file=/config/keys/privkey.pem \
+  --address=0.0.0.0:51515 \
+  --server-username=kopia \
+  --server-password=kopia
+```
+
+**When specifying `CLI_ARGS`, they must be on a single line.**
+
+If you have entered invalid `CLI_ARGS`, Kopia will not start (see the logs if this happens).
+
 ## Usage
 
 Example snippets to start creating a container:
@@ -48,6 +80,7 @@ services:
       - USERNAME=kopia
       - PASSWORD=kopia
       - KOPIA_PERSIST_CREDENTIALS_ON_CONNECT=true #optional
+      - CLI_ARGS= #optional
     volumes:
       - </path/to/appdata>:/config
       - </path/to/source>:/source
@@ -73,6 +106,7 @@ docker run -d \
   -e USERNAME=kopia \
   -e PASSWORD=kopia \
   -e KOPIA_PERSIST_CREDENTIALS_ON_CONNECT=true `#optional` \
+  -e CLI_ARGS= `#optional` \
   -p 51515:51515 \
   -v </path/to/appdata>:/config \
   -v </path/to/source>:/source \
@@ -96,8 +130,9 @@ To configure the container, pass variables at runtime using the format `<externa
 | `-e PGID=1000` | GID for permissions - see below for explanation |
 | `-e TZ=Etc/UTC` | Specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
 | `-e USERNAME=kopia` | Specify a username to access the WebUI |
-| `-e PASSWORD=kopia` | Specify the password that you WILL use when creating a repository, this is also the password to access the WebUI |
+| `-e PASSWORD=kopia` | Specify a password to access the WebUI |
 | `-e KOPIA_PERSIST_CREDENTIALS_ON_CONNECT=true` | Automatically connect to repository |
+| `-e CLI_ARGS=` | Overwrite CLI arguments |
 | `-v /config` | Appdata Path |
 | `-v /source` | Backup Source Path |
 | `-v /cache` | Temporary Uploads Path (Cache) |
@@ -143,6 +178,7 @@ Instructions for updating containers:
 
 ## Versions
 
+* **21.04.23:** - Add `CLI_ARGS` variable.
 * **14.04.23:** - BREAKING: move cache from /tmp to /cache.
 * **11.04.23:** - fix run script ('kopia server' to 'kopia server start')
 * **28.03.23:** - set home in service
