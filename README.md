@@ -29,6 +29,10 @@ This image supports the following architectures:
 
 The WebUI can be found at `http://your-ip:51515`. Login with the username and password specified in the `USERNAME` and `PASSWORD` variables.
 
+The `htpasswd` file is automatically generated on startup (if it does not exist) with the specified username/password in the variables.
+
+After this file has been generated, the `USERNAME`/`PASSWORD` variables can be removed, and the `htpasswd` file can be modified with the `htpasswd` command as desired.
+
 By default, Kopia will be started with the following configuration:
 
 ```bash
@@ -36,10 +40,8 @@ kopia server start \
   --insecure \
   --disable-csrf-token-checks \
   --address=0.0.0.0:51515 \
-  --server-username=${USERNAME} \
-  --server-password=${PASSWORD}
+  --htpasswd-file /config/htpasswd
 ```
-
 This can be easily overwritten by specifying startup parameters in the `CLI_ARGS` variable, which will overwrite everything after the `kopia` command, eg:
 
 `CLI_ARGS=`
@@ -129,8 +131,8 @@ To configure the container, pass variables at runtime using the format `<externa
 | `-e PUID=1000` | UID for permissions - see below for explanation |
 | `-e PGID=1000` | GID for permissions - see below for explanation |
 | `-e TZ=Etc/UTC` | Specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
-| `-e USERNAME=kopia` | Specify a username to access the WebUI |
-| `-e PASSWORD=kopia` | Specify a password to access the WebUI |
+| `-e USERNAME=kopia` | Specify a username to access the WebUI, this can be removed after first setup |
+| `-e PASSWORD=kopia` | Specify a password to access the WebUI, this can be removed after first setup |
 | `-e KOPIA_PERSIST_CREDENTIALS_ON_CONNECT=true` | Automatically connect to repository |
 | `-e CLI_ARGS=` | Overwrite CLI arguments |
 | `-v /config` | Appdata Path |
@@ -178,6 +180,7 @@ Instructions for updating containers:
 
 ## Versions
 
+* **22.04.23:** - use `htpasswd` file.
 * **21.04.23:** - Add `CLI_ARGS` variable.
 * **14.04.23:** - BREAKING: move cache from /tmp to /cache.
 * **11.04.23:** - fix run script ('kopia server' to 'kopia server start')
