@@ -85,7 +85,7 @@ github.com/google/go-cmp                              v0.5.9                    
 github.com/google/go-querystring                      v1.1.0                                go-module  
 github.com/google/pprof                               v0.0.0-20211214055906-6f57359322fd    go-module  
 github.com/google/readahead                           v0.0.0-20161222183148-eaceba169032    go-module  
-github.com/google/s2a-go                              v0.1.0                                go-module  
+github.com/google/s2a-go                              v0.1.2                                go-module  
 github.com/google/uuid                                v1.3.0                                go-module  
 github.com/googleapis/enterprise-certificate-proxy    v0.1.0                                go-module  
 github.com/googleapis/enterprise-certificate-proxy    v0.2.3                                go-module  
@@ -93,7 +93,7 @@ github.com/googleapis/gax-go/v2                       v2.4.0                    
 github.com/googleapis/gax-go/v2                       v2.8.0                                go-module  
 github.com/gorilla/mux                                v1.8.0                                go-module  
 github.com/hanwen/go-fuse/v2                          v2.1.0                                go-module  
-github.com/hanwen/go-fuse/v2                          v2.2.0                                go-module  
+github.com/hanwen/go-fuse/v2                          v2.3.0                                go-module  
 github.com/hashicorp/errwrap                          v1.0.0                                go-module  
 github.com/hashicorp/go-multierror                    v1.1.1                                go-module  
 github.com/hashicorp/go-uuid                          v1.0.3                                go-module  
@@ -109,7 +109,7 @@ github.com/jmespath/go-jmespath                       v0.4.0                    
 github.com/json-iterator/go                           v1.1.12                               go-module  
 github.com/jzelinskie/whirlpool                       v0.0.0-20201016144138-0675e54bb004    go-module  
 github.com/klauspost/compress                         v1.15.9                               go-module  
-github.com/klauspost/compress                         v1.16.4                               go-module  
+github.com/klauspost/compress                         v1.16.5                               go-module  
 github.com/klauspost/cpuid/v2                         v2.2.4                                go-module  
 github.com/klauspost/pgzip                            v1.2.5                                go-module  
 github.com/klauspost/reedsolomon                      v1.11.7                               go-module  
@@ -207,11 +207,11 @@ golang.org/x/text                                     v0.3.7                    
 golang.org/x/text                                     v0.9.0                                go-module  
 golang.org/x/time                                     v0.0.0-20220722155302-e5dcc9cfc0b9    go-module  
 golang.org/x/xerrors                                  v0.0.0-20220907171357-04be3eba64a2    go-module  
-google.golang.org/api                                 v0.118.0                              go-module  
+google.golang.org/api                                 v0.120.0                              go-module  
 google.golang.org/api                                 v0.91.0                               go-module  
 google.golang.org/appengine                           v1.6.7                                go-module  
 google.golang.org/genproto                            v0.0.0-20220624142145-8cd45d7dbd1f    go-module  
-google.golang.org/genproto                            v0.0.0-20230403163135-c38d8f061ccd    go-module  
+google.golang.org/genproto                            v0.0.0-20230410155749-daa745c078e1    go-module  
 google.golang.org/grpc                                v1.47.0                               go-module  
 google.golang.org/grpc                                v1.54.0                               go-module  
 google.golang.org/protobuf                            v1.28.0                               go-module  
@@ -224,13 +224,13 @@ libacl                                                2.3.1-r1                  
 libattr                                               2.5.1-r2                              apk        
 libbsd                                                0.11.7-r0                             apk        
 libc-utils                                            0.7.2-r3                              apk        
-libcrypto3                                            3.0.8-r3                              apk        
+libcrypto3                                            3.0.8-r4                              apk        
 libcurl                                               8.0.1-r0                              apk        
 libexpat                                              2.5.0-r0                              apk        
 libintl                                               0.21.1-r1                             apk        
 libmd                                                 1.0.4-r0                              apk        
 libproc                                               3.3.17-r2                             apk        
-libssl3                                               3.0.8-r3                              apk        
+libssl3                                               3.0.8-r4                              apk        
 libuuid                                               2.38.1-r1                             apk        
 linux-pam                                             1.5.2-r1                              apk        
 musl                                                  1.2.3-r4                              apk        
