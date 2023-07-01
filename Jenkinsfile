@@ -217,16 +217,15 @@ pipeline {
       }
       steps {
         sh '''#!/bin/bash
-              set -e
               TEMPDIR=$(mktemp -d)
               docker pull ghcr.io/imagegenius/jenkins-builder:latest
-              docker run --rm -e CONTAINER_NAME=${CONTAINER_NAME} -e GITHUB_BRANCH=main -v ${TEMPDIR}:/ansible/jenkins ghcr.io/imagegenius/jenkins-builder:latest 
               # Stage 1 - Jenkinsfile update
+              mkdir -p ${TEMPDIR}/repo
+              git clone https://ImageGeniusCI:${GITHUB_TOKEN}@github.com/${IG_USER}/${IG_REPO}.git ${TEMPDIR}/repo/${IG_REPO}
+			  cd ${TEMPDIR}/repo/${IG_REPO}
+              git checkout -f main
+              docker run --rm -e CONTAINER_NAME=${CONTAINER_NAME} -e GITHUB_BRANCH=main -v ${TEMPDIR}/repo/${IG_REPO}:/tmp/docker-${CONTAINER_NAME}:ro -v ${TEMPDIR}:/ansible/jenkins ghcr.io/imagegenius/jenkins-builder:latest 
               if [[ "$(md5sum Jenkinsfile | awk '{ print $1 }')" != "$(md5sum ${TEMPDIR}/docker-${CONTAINER_NAME}/Jenkinsfile | awk '{ print $1 }')" ]]; then
-                mkdir -p ${TEMPDIR}/repo
-                git clone https://github.com/${IG_USER}/${IG_REPO}.git ${TEMPDIR}/repo/${IG_REPO}
-                cd ${TEMPDIR}/repo/${IG_REPO}
-                git checkout -f main
                 cp ${TEMPDIR}/docker-${CONTAINER_NAME}/Jenkinsfile ${TEMPDIR}/repo/${IG_REPO}/
                 git add Jenkinsfile
                 git commit -m 'Bot Updating Templated Files'
@@ -244,7 +243,7 @@ pipeline {
               NEWHASH=$(grep -hs ^ ${TEMPLATED_FILES} | md5sum | cut -c1-8)
               if [[ "${CURRENTHASH}" != "${NEWHASH}" ]] || ! grep -q '.jenkins-external' "${WORKSPACE}/.gitignore" 2>/dev/null; then
                 mkdir -p ${TEMPDIR}/repo
-                git clone https://github.com/${IG_USER}/${IG_REPO}.git ${TEMPDIR}/repo/${IG_REPO}
+                git clone https://ImageGeniusCI:${GITHUB_TOKEN}@github.com/${IG_USER}/${IG_REPO}.git ${TEMPDIR}/repo/${IG_REPO}
                 cd ${TEMPDIR}/repo/${IG_REPO}
                 git checkout -f main
                 cd ${TEMPDIR}/docker-${CONTAINER_NAME}
@@ -264,7 +263,7 @@ pipeline {
                 echo "false" > /tmp/${COMMIT_SHA}-${BUILD_NUMBER}
               fi
               mkdir -p ${TEMPDIR}/unraid
-              git clone https://github.com/imagegenius/templates.git ${TEMPDIR}/unraid/templates
+              git clone https://ImageGeniusCI:${GITHUB_TOKEN}@github.com/imagegenius/templates.git ${TEMPDIR}/unraid/templates
               if [[ -f ${TEMPDIR}/unraid/templates/unraid/img/${CONTAINER_NAME}.png ]]; then
                 sed -i "s|main/unraid/img/default.png|main/unraid/img/${CONTAINER_NAME}.png|" ${TEMPDIR}/docker-${CONTAINER_NAME}/.jenkins-external/${CONTAINER_NAME}.xml
               fi
@@ -343,6 +342,7 @@ pipeline {
         sh '''#!/bin/bash
               set -e
               BUILDX_CONTAINER=$(head /dev/urandom | tr -dc 'a-z' | head -c12)
+              trap 'docker buildx rm ${BUILDX_CONTAINER}' EXIT
               docker buildx create --driver=docker-container --name=${BUILDX_CONTAINER}
               docker buildx build \
                 --label \"org.opencontainers.image.created=${GITHUB_DATE}\" \
@@ -357,9 +357,8 @@ pipeline {
                 --label \"org.opencontainers.image.title=Kopia\" \
                 --label \"org.opencontainers.image.description=Kopia is a fast and secure open-source backup/restore tool that allows you to create encrypted snapshots of your data and save the snapshots to remote or cloud storage of your choice, to network-attached storage or server, or locally on your machine.\" \
                 --no-cache --pull -t ${GITHUBIMAGE}:${META_TAG} --platform=linux/amd64 \
-                --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} . \
-                --builder=${BUILDX_CONTAINER} --load
-              docker buildx rm ${BUILDX_CONTAINER}
+                --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} \
+                --builder=${BUILDX_CONTAINER} --load .
            '''
       }
     }
@@ -379,6 +378,7 @@ pipeline {
             sh '''#!/bin/bash
                   set -e
                   BUILDX_CONTAINER=$(head /dev/urandom | tr -dc 'a-z' | head -c12)
+                  trap 'docker buildx rm ${BUILDX_CONTAINER}' EXIT
                   docker buildx create --driver=docker-container --name=${BUILDX_CONTAINER}
                   docker buildx build \
                     --label \"org.opencontainers.image.created=${GITHUB_DATE}\" \
@@ -393,9 +393,8 @@ pipeline {
                     --label \"org.opencontainers.image.title=Kopia\" \
                     --label \"org.opencontainers.image.description=Kopia is a fast and secure open-source backup/restore tool that allows you to create encrypted snapshots of your data and save the snapshots to remote or cloud storage of your choice, to network-attached storage or server, or locally on your machine.\" \
                     --no-cache --pull -t ${GITHUBIMAGE}:amd64-${META_TAG} --platform=linux/amd64 \
-                    --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} . \
-                    --builder=${BUILDX_CONTAINER} --load
-                  docker buildx rm ${BUILDX_CONTAINER}
+                    --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} \
+                    --builder=${BUILDX_CONTAINER} --load .
                '''
           }
         }
@@ -412,6 +411,7 @@ pipeline {
             sh '''#!/bin/bash
                   set -e
                   BUILDX_CONTAINER=$(head /dev/urandom | tr -dc 'a-z' | head -c12)
+                  trap 'docker buildx rm ${BUILDX_CONTAINER}' EXIT
                   docker buildx create --driver=docker-container --name=${BUILDX_CONTAINER}
                   docker buildx build \
                     --label \"org.opencontainers.image.created=${GITHUB_DATE}\" \
@@ -426,9 +426,8 @@ pipeline {
                     --label \"org.opencontainers.image.title=Kopia\" \
                     --label \"org.opencontainers.image.description=Kopia is a fast and secure open-source backup/restore tool that allows you to create encrypted snapshots of your data and save the snapshots to remote or cloud storage of your choice, to network-attached storage or server, or locally on your machine.\" \
                     --no-cache --pull -f Dockerfile.aarch64 -t ${GITHUBIMAGE}:arm64v8-${META_TAG} --platform=linux/arm64 \
-                    --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} . \
-                    --builder=${BUILDX_CONTAINER} --load
-                  docker buildx rm ${BUILDX_CONTAINER}
+                    --build-arg ${BUILD_VERSION_ARG}=${EXT_RELEASE} --build-arg VERSION=\"${VERSION_TAG}\" --build-arg BUILD_DATE=${GITHUB_DATE} \
+                    --builder=${BUILDX_CONTAINER} --load .
                '''
             sh "docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ghcr.io/imagegenius/igdev-buildcache:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER}"
             retry(5) {
@@ -467,7 +466,7 @@ pipeline {
               NEW_PACKAGE_TAG=$(md5sum ${TEMPDIR}/package_versions.txt | cut -c1-8 )
               echo "Package tag sha from current packages in buit container is ${NEW_PACKAGE_TAG} comparing to old ${PACKAGE_TAG} from github"
               if [ "${NEW_PACKAGE_TAG}" != "${PACKAGE_TAG}" ]; then
-                git clone https://github.com/${IG_USER}/${IG_REPO}.git ${TEMPDIR}/${IG_REPO}
+                git clone https://ImageGeniusCI:${GITHUB_TOKEN}@github.com/${IG_USER}/${IG_REPO}.git ${TEMPDIR}/${IG_REPO}
                 git --git-dir ${TEMPDIR}/${IG_REPO}/.git checkout -f main
                 cp ${TEMPDIR}/package_versions.txt ${TEMPDIR}/${IG_REPO}/
                 cd ${TEMPDIR}/${IG_REPO}/
@@ -833,7 +832,8 @@ pipeline {
                    docker rmi ${GITHUBIMAGE}:arm64v8-${META_TAG} || :
                  else
                    docker rmi ${GITHUBIMAGE}:${META_TAG} || :
-                 fi'''
+                 fi
+            '''
         }
       }
     }
