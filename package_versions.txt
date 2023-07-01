@@ -2,7 +2,7 @@ NAME                                                        VERSION             
 alpine-baselayout                                           3.4.3-r1                               apk        
 alpine-baselayout-data                                      3.4.3-r1                               apk        
 alpine-keys                                                 2.4-r1                                 apk        
-alpine-release                                              3.18.0-r0                              apk        
+alpine-release                                              3.18.2-r0                              apk        
 apache2-utils                                               2.4.57-r2                              apk        
 apk-tools                                                   2.14.0-r2                              apk        
 apr                                                         1.7.4-r0                               apk        
@@ -114,7 +114,7 @@ github.com/klauspost/reedsolomon                            v1.11.7             
 github.com/koofr/go-httpclient                              v0.0.0-20230225102643-5d51a2e9dea6     go-module  
 github.com/koofr/go-koofrclient                             v0.0.0-20221207135200-cbd7fc9ad6a6     go-module  
 github.com/kopia/htmluibuild                                v0.0.0-20230326183719-f482ef17e2c9     go-module  
-github.com/kopia/kopia                                      v20230624.0.0-                         go-module  
+github.com/kopia/kopia                                      v20230701.0.0-                         go-module  
 github.com/kr/fs                                            v0.1.0                                 go-module  
 github.com/kylelemons/godebug                               v1.1.0                                 go-module  
 github.com/lucasb-eyer/go-colorful                          v1.2.0                                 go-module  
@@ -242,7 +242,7 @@ procps-ng                                                   4.0.3-r1            
 rclone                                                      1.62.2-r2                              apk        
 readline                                                    8.2.1-r1                               apk        
 scanelf                                                     1.3.7-r1                               apk        
-shadow                                                      4.13-r2                                apk        
+shadow                                                      4.13-r4                                apk        
 skalibs                                                     2.13.1.1-r1                            apk        
 ssl_client                                                  1.36.1-r0                              apk        
 storj.io/common                                             v0.0.0-20221123115229-fed3e6651b63     go-module  
