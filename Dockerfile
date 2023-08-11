@@ -23,8 +23,12 @@ RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
     apache2-utils \
-    fuse3 \
-    rclone && \
+    docker-cli \
+    findutils \
+    fuse \
+    openssl \
+    rclone \
+    sqlite && \
   echo "**** download kopia ****" && \
   mkdir -p \
     /tmp/kopia && \
