@@ -116,7 +116,7 @@ github.com/klauspost/reedsolomon                            v1.11.7             
 github.com/koofr/go-httpclient                              v0.0.0-20230225102643-5d51a2e9dea6     go-module  
 github.com/koofr/go-koofrclient                             v0.0.0-20221207135200-cbd7fc9ad6a6     go-module  
 github.com/kopia/htmluibuild                                v0.0.0-20230326183719-f482ef17e2c9     go-module  
-github.com/kopia/kopia                                      v20230811.0.0-                         go-module  
+github.com/kopia/kopia                                      v20230812.0.0-                         go-module  
 github.com/kr/fs                                            v0.1.0                                 go-module  
 github.com/kylelemons/godebug                               v1.1.0                                 go-module  
 github.com/lucasb-eyer/go-colorful                          v1.2.0                                 go-module  
