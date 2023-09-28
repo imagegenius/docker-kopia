@@ -6,11 +6,6 @@ start_kopia() {
             kopia "$@"
 }
 
-if [ -f "/tmp/kopia.repository" ]; then
-    echo "WARN: Please modify your cache volume mount from '/tmp' to '/cache'!"
-    export KOPIA_CACHE_DIRECTORY=/tmp
-fi
-
 export HOME=/config
 
 if [ -z "${CLI_ARGS}" ]; then
@@ -21,5 +16,5 @@ if [ -z "${CLI_ARGS}" ]; then
         --htpasswd-file "/config/htpasswd"
 else
     echo "Running Kopia with the specified 'CLI_ARGS'."
-    start_kopia "${CLI_ARGS}"
+    start_kopia ${CLI_ARGS}
 fi
