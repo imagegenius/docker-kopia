@@ -124,7 +124,7 @@ github.com/klauspost/reedsolomon                                 v1.11.8        
 github.com/koofr/go-httpclient                                   v0.0.0-20230225102643-5d51a2e9dea6     go-module  
 github.com/koofr/go-koofrclient                                  v0.0.0-20221207135200-cbd7fc9ad6a6     go-module  
 github.com/kopia/htmluibuild                                     v0.0.1-0.20231019063300-75c2a788c7d0   go-module  
-github.com/kopia/kopia                                           v20231111.0.0-                         go-module  
+github.com/kopia/kopia                                           v20231118.0.0-                         go-module  
 github.com/kr/fs                                                 v0.1.0                                 go-module  
 github.com/kylelemons/godebug                                    v1.1.0                                 go-module  
 github.com/lucasb-eyer/go-colorful                               v1.2.0                                 go-module  
@@ -235,7 +235,7 @@ libacl                                                           2.3.1-r3       
 libattr                                                          2.5.1-r4                               apk        
 libbsd                                                           0.11.7-r1                              apk        
 libc-utils                                                       0.7.2-r5                               apk        
-libcrypto3                                                       3.1.4-r0                               apk        
+libcrypto3                                                       3.1.4-r1                               apk        
 libcurl                                                          8.4.0-r0                               apk        
 libexpat                                                         2.5.0-r1                               apk        
 libidn2                                                          2.3.4-r1                               apk        
@@ -243,7 +243,7 @@ libintl                                                          0.21.1-r7      
 libmd                                                            1.0.4-r2                               apk        
 libncursesw                                                      6.4_p20230506-r0                       apk        
 libproc2                                                         4.0.4-r0                               apk        
-libssl3                                                          3.1.4-r0                               apk        
+libssl3                                                          3.1.4-r1                               apk        
 libunistring                                                     1.1-r1                                 apk        
 libuuid                                                          2.38.1-r8                              apk        
 linux-pam                                                        1.5.2-r10                              apk        
@@ -253,7 +253,7 @@ ncurses-terminfo-base                                            6.4_p20230506-r
 netcat-openbsd                                                   1.219-r1                               apk        
 nghttp2-libs                                                     1.57.0-r0                              apk        
 oniguruma                                                        6.9.8-r1                               apk        
-openssl                                                          3.1.4-r0                               apk        
+openssl                                                          3.1.4-r1                               apk        
 procps-ng                                                        4.0.4-r0                               apk        
 rclone                                                           1.62.2-r5                              apk        
 readline                                                         8.2.1-r1                               apk        
