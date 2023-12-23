@@ -124,7 +124,7 @@ github.com/klauspost/reedsolomon                                 v1.11.8        
 github.com/koofr/go-httpclient                                   v0.0.0-20230225102643-5d51a2e9dea6     go-module  
 github.com/koofr/go-koofrclient                                  v0.0.0-20221207135200-cbd7fc9ad6a6     go-module  
 github.com/kopia/htmluibuild                                     v0.0.1-0.20231019063300-75c2a788c7d0   go-module  
-github.com/kopia/kopia                                           v20231216.0.0-                         go-module  
+github.com/kopia/kopia                                           v20231223.0.0-                         go-module  
 github.com/kr/fs                                                 v0.1.0                                 go-module  
 github.com/kylelemons/godebug                                    v1.1.0                                 go-module  
 github.com/lucasb-eyer/go-colorful                               v1.2.0                                 go-module  
@@ -230,7 +230,7 @@ gopkg.in/ini.v1                                                  v1.67.0        
 gopkg.in/kothar/go-backblaze.v0                                  v0.0.0-20210124194846-35409b867216     go-module  
 gopkg.in/yaml.v2                                                 v2.4.0                                 go-module  
 gopkg.in/yaml.v3                                                 v3.0.1                                 go-module  
-jq                                                               1.6-r3                                 apk        
+jq                                                               1.6-r4                                 apk        
 libacl                                                           2.3.1-r3                               apk        
 libattr                                                          2.5.1-r4                               apk        
 libbsd                                                           0.11.7-r1                              apk        
