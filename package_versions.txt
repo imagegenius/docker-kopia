@@ -124,7 +124,7 @@ github.com/klauspost/reedsolomon                                 v1.11.8        
 github.com/koofr/go-httpclient                                   v0.0.0-20230225102643-5d51a2e9dea6     go-module                   
 github.com/koofr/go-koofrclient                                  v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                   
 github.com/kopia/htmluibuild                                     v0.0.1-0.20231019063300-75c2a788c7d0   go-module                   
-github.com/kopia/kopia                                           v20240309.0.0-                         go-module                   
+github.com/kopia/kopia                                           v20240316.0.0-                         go-module                   
 github.com/kr/fs                                                 v0.1.0                                 go-module  (+1 duplicate)   
 github.com/kylelemons/godebug                                    v1.1.0                                 go-module  (+1 duplicate)   
 github.com/lucasb-eyer/go-colorful                               v1.2.0                                 go-module                   
@@ -237,7 +237,7 @@ libbsd                                                           0.11.7-r1      
 libc-utils                                                       0.7.2-r5                               apk                         
 libcrypto3                                                       3.1.4-r5                               apk                         
 libcurl                                                          8.5.0-r0                               apk                         
-libexpat                                                         2.6.0-r0                               apk                         
+libexpat                                                         2.6.2-r0                               apk                         
 libidn2                                                          2.3.4-r1                               apk                         
 libintl                                                          0.21.1-r7                              apk                         
 libmd                                                            1.0.4-r2                               apk                         
