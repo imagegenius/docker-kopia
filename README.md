@@ -180,6 +180,7 @@ Instructions for updating containers:
 
 ## Versions
 
+* **24.03.24:** - rebase to alpine edge.
 * **22.04.23:** - use `htpasswd` file.
 * **21.04.23:** - Add `CLI_ARGS` variable.
 * **14.04.23:** - BREAKING: move cache from /tmp to /cache.
