@@ -94,6 +94,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "24.03.24:", desc: "rebase to alpine edge." }
   - { date: "22.04.23:", desc: "use `htpasswd` file." }
   - { date: "21.04.23:", desc: "Add `CLI_ARGS` variable." }
   - { date: "14.04.23:", desc: "BREAKING: move cache from /tmp to /cache." }
