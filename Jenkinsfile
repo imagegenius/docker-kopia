@@ -240,7 +240,7 @@ pipeline {
                   ghcr.io/linuxserver/baseimage-alpine:3.17 s6-envdir -fn -- /var/run/s6/container_environment /bin/bash -c "\
                     apk add --no-cache py3-pip && \
                     pip install s3cmd && \
-                    s3cmd --host=s3.imagegenius.io --host-bucket= put -m text/xml /mnt/shellcheck-result.xml s3://ci-tests.imagegenius.io/${GITHUBIMAGE}/${META_TAG}/shellcheck-result.xml" || :
+                    s3cmd --host=s3.imagegenius.io --host-bucket= put -m text/xml /mnt/shellcheck-result.xml s3://ci-tests.imagegenius.io/${CONTAINER_NAME}/${META_TAG}/shellcheck-result.xml" || :
              '''
         }
       }
