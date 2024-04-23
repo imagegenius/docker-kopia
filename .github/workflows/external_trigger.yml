@@ -37,6 +37,7 @@ jobs:
           image="imagegenius/kopia"
           tag="latest"
           token=$(curl -sX GET \
+            -u "${{ secrets.CR_USER }}:${{ secrets.CR_PAT }}" \
             "https://ghcr.io/token?scope=repository%3Aimagegenius%2Fkopia%3Apull" \
             | jq -r '.token')
             multidigest=$(curl -s \
