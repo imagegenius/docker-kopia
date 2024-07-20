@@ -2,7 +2,7 @@ NAME                                                                         VER
 alpine-baselayout                                                            3.6.5-r0                               apk                         
 alpine-baselayout-data                                                       3.6.5-r0                               apk                         
 alpine-keys                                                                  2.4-r1                                 apk                         
-apache2-utils                                                                2.4.61-r0                              apk                         
+apache2-utils                                                                2.4.62-r0                              apk                         
 apk-tools                                                                    2.14.4-r1                              apk                         
 apr                                                                          1.7.4-r0                               apk                         
 apr-util                                                                     1.6.3-r1                               apk                         
@@ -137,7 +137,7 @@ github.com/klauspost/reedsolomon                                             v1.
 github.com/koofr/go-httpclient                                               v0.0.0-20230225102643-5d51a2e9dea6     go-module                   
 github.com/koofr/go-koofrclient                                              v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                   
 github.com/kopia/htmluibuild                                                 v0.0.1-0.20240405040759-90bfbf000696   go-module                   
-github.com/kopia/kopia                                                       v20240713.0.0-                         go-module                   
+github.com/kopia/kopia                                                       v20240720.0.0-                         go-module                   
 github.com/kr/fs                                                             v0.1.0                                 go-module  (+1 duplicate)   
 github.com/kylelemons/godebug                                                v1.1.0                                 go-module  (+1 duplicate)   
 github.com/lucasb-eyer/go-colorful                                           v1.2.0                                 go-module                   
