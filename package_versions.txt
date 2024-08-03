@@ -11,7 +11,7 @@ bazil.org/fuse                                                               v0.
 brotli-libs                                                                  1.1.0-r2                               apk                         
 busybox                                                                      1.36.1-r31                             apk                         
 busybox-binsh                                                                1.36.1-r31                             apk                         
-c-ares                                                                       1.32.1-r0                              apk                         
+c-ares                                                                       1.32.2-r0                              apk                         
 ca-certificates                                                              20240705-r0                            apk                         
 ca-certificates-bundle                                                       20240705-r0                            apk                         
 catatonit                                                                    0.2.0-r0                               apk                         
@@ -137,7 +137,7 @@ github.com/klauspost/reedsolomon                                             v1.
 github.com/koofr/go-httpclient                                               v0.0.0-20230225102643-5d51a2e9dea6     go-module                   
 github.com/koofr/go-koofrclient                                              v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                   
 github.com/kopia/htmluibuild                                                 v0.0.1-0.20240405040759-90bfbf000696   go-module                   
-github.com/kopia/kopia                                                       v20240727.0.0-                         go-module                   
+github.com/kopia/kopia                                                       v20240803.0.0-                         go-module                   
 github.com/kr/fs                                                             v0.1.0                                 go-module  (+1 duplicate)   
 github.com/kylelemons/godebug                                                v1.1.0                                 go-module  (+1 duplicate)   
 github.com/lucasb-eyer/go-colorful                                           v1.2.0                                 go-module                   
