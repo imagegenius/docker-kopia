@@ -1,10 +1,10 @@
 NAME                                                                         VERSION                                TYPE                      
 alpine-baselayout                                                            3.6.6-r0                               apk                        
 alpine-baselayout-data                                                       3.6.6-r0                               apk                        
-alpine-keys                                                                  2.4-r1                                 apk                        
+alpine-keys                                                                  2.5-r0                                 apk                        
 apache2-utils                                                                2.4.62-r0                              apk                        
 apk-tools                                                                    2.14.4-r2                              apk                        
-apr                                                                          1.7.4-r0                               apk                        
+apr                                                                          1.7.5-r0                               apk                        
 apr-util                                                                     1.6.3-r1                               apk                        
 bash                                                                         5.2.32-r0                              apk                        
 bazil.org/fuse                                                               v0.0.0-20230120002735-62a210ff1fd5     go-module                  
@@ -25,7 +25,7 @@ coreutils-env                                                                9.5
 coreutils-fmt                                                                9.5-r1                                 apk                        
 coreutils-sha512sum                                                          9.5-r1                                 apk                        
 curl                                                                         8.9.1-r1                               apk                        
-docker-cli                                                                   27.1.2-r0                              apk                        
+docker-cli                                                                   27.2.0-r0                              apk                        
 findutils                                                                    4.10.0-r0                              apk                        
 fuse                                                                         2.9.9-r5                               apk                        
 fuse-common                                                                  3.16.2-r0                              apk                        
@@ -73,7 +73,7 @@ github.com/coreos/go-semver                                                  v0.
 github.com/coreos/go-systemd/v22                                             v22.5.0                                go-module  (+1 duplicate)  
 github.com/cpuguy83/go-md2man/v2                                             v2.0.3                                 go-module                  
 github.com/cronokirby/saferith                                               v0.33.0                                go-module                  
-github.com/docker/cli/cmd/docker                                             v27.1.2                                go-module                  
+github.com/docker/cli/cmd/docker                                             v27.2.0                                go-module                  
 github.com/dropbox/dropbox-sdk-go-unofficial/v6                              v6.0.5                                 go-module                  
 github.com/edsrzf/mmap-go                                                    v1.1.0                                 go-module                  
 github.com/emersion/go-message                                               v0.18.0                                go-module                  
@@ -137,7 +137,7 @@ github.com/klauspost/reedsolomon                                             v1.
 github.com/koofr/go-httpclient                                               v0.0.0-20230225102643-5d51a2e9dea6     go-module                  
 github.com/koofr/go-koofrclient                                              v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                  
 github.com/kopia/htmluibuild                                                 v0.0.1-0.20240405040759-90bfbf000696   go-module                  
-github.com/kopia/kopia                                                       v20240824.0.0-                         go-module                  
+github.com/kopia/kopia                                                       v20240831.0.0-                         go-module                  
 github.com/kr/fs                                                             v0.1.0                                 go-module  (+1 duplicate)  
 github.com/kylelemons/godebug                                                v1.1.0                                 go-module  (+1 duplicate)  
 github.com/lucasb-eyer/go-colorful                                           v1.2.0                                 go-module                  
@@ -258,7 +258,7 @@ libidn2                                                                      2.3
 libintl                                                                      0.22.5-r0                              apk                        
 libmd                                                                        1.1.0-r0                               apk                        
 libncursesw                                                                  6.5_p20240601-r0                       apk                        
-libproc2                                                                     4.0.4-r0                               apk                        
+libproc2                                                                     4.0.4-r1                               apk                        
 libpsl                                                                       0.21.5-r2                              apk                        
 libssl3                                                                      3.3.1-r3                               apk                        
 libunistring                                                                 1.2-r0                                 apk                        
@@ -271,7 +271,7 @@ netcat-openbsd                                                               1.2
 nghttp2-libs                                                                 1.62.1-r0                              apk                        
 oniguruma                                                                    6.9.9-r0                               apk                        
 openssl                                                                      3.3.1-r3                               apk                        
-procps-ng                                                                    4.0.4-r0                               apk                        
+procps-ng                                                                    4.0.4-r1                               apk                        
 rclone                                                                       1.67.0-r1                              apk                        
 readline                                                                     8.2.13-r0                              apk                        
 scanelf                                                                      1.3.7-r2                               apk                        
