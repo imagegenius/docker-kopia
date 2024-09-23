@@ -27,7 +27,7 @@ coreutils-env                                                                9.5
 coreutils-fmt                                                                9.5-r1                                 apk                         
 coreutils-sha512sum                                                          9.5-r1                                 apk                         
 curl                                                                         8.9.1-r1                               apk                         
-docker-cli                                                                   27.3.0-r0                              apk                         
+docker-cli                                                                   27.3.1-r0                              apk                         
 findutils                                                                    4.10.0-r0                              apk                         
 fuse                                                                         2.9.9-r5                               apk                         
 fuse-common                                                                  3.16.2-r0                              apk                         
@@ -98,7 +98,7 @@ github.com/coreos/go-systemd/v22                                             v22
 github.com/cpuguy83/go-md2man/v2                                             v2.0.4                                 go-module                   
 github.com/cronokirby/saferith                                               v0.33.0                                go-module                   
 github.com/davecgh/go-spew                                                   v1.1.2-0.20180830191138-d8f796af33cc   go-module                   
-github.com/docker/cli/cmd/docker                                             v27.3.0                                go-module                   
+github.com/docker/cli/cmd/docker                                             v27.3.1                                go-module                   
 github.com/dropbox/dropbox-sdk-go-unofficial/v6                              v6.0.5                                 go-module                   
 github.com/edsrzf/mmap-go                                                    v1.1.0                                 go-module                   
 github.com/emersion/go-message                                               v0.18.0                                go-module                   
@@ -164,7 +164,7 @@ github.com/klauspost/reedsolomon                                             v1.
 github.com/koofr/go-httpclient                                               v0.0.0-20240520111329-e20f8f203988     go-module                   
 github.com/koofr/go-koofrclient                                              v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                   
 github.com/kopia/htmluibuild                                                 v0.0.1-0.20240405040759-90bfbf000696   go-module                   
-github.com/kopia/kopia                                                       v20240921.0.0-                         go-module                   
+github.com/kopia/kopia                                                       v20240922.0.0-                         go-module                   
 github.com/kr/fs                                                             v0.1.0                                 go-module  (+1 duplicate)   
 github.com/kylelemons/godebug                                                v1.1.0                                 go-module  (+1 duplicate)   
 github.com/lpar/date                                                         v1.0.0                                 go-module                   
