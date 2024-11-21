@@ -18,15 +18,15 @@ ca-certificates-bundle                                                          
 catatonit                                                                            0.2.0-r0                               apk                        
 cel.dev/expr                                                                         v0.16.1                                go-module                  
 cloud.google.com/go                                                                  v0.116.0                               go-module                  
-cloud.google.com/go/auth                                                             v0.10.1                                go-module                  
+cloud.google.com/go/auth                                                             v0.10.2                                go-module                  
 cloud.google.com/go/auth                                                             v0.7.0                                 go-module                  
 cloud.google.com/go/auth/oauth2adapt                                                 v0.2.2                                 go-module                  
 cloud.google.com/go/auth/oauth2adapt                                                 v0.2.5                                 go-module                  
 cloud.google.com/go/compute/metadata                                                 v0.4.0                                 go-module                  
 cloud.google.com/go/compute/metadata                                                 v0.5.2                                 go-module                  
-cloud.google.com/go/iam                                                              v1.2.1                                 go-module                  
-cloud.google.com/go/monitoring                                                       v1.21.1                                go-module                  
-cloud.google.com/go/storage                                                          v1.46.0                                go-module                  
+cloud.google.com/go/iam                                                              v1.2.2                                 go-module                  
+cloud.google.com/go/monitoring                                                       v1.21.2                                go-module                  
+cloud.google.com/go/storage                                                          v1.47.0                                go-module                  
 coreutils                                                                            9.5-r1                                 apk                        
 coreutils-env                                                                        9.5-r1                                 apk                        
 coreutils-fmt                                                                        9.5-r1                                 apk                        
@@ -42,7 +42,7 @@ github.com/Azure/azure-sdk-for-go/sdk/azidentity                                
 github.com/Azure/azure-sdk-for-go/sdk/azidentity                                     v1.8.0                                 go-module                  
 github.com/Azure/azure-sdk-for-go/sdk/internal                                       v1.10.0                                go-module  (+1 duplicate)  
 github.com/Azure/azure-sdk-for-go/sdk/storage/azblob                                 v1.3.2                                 go-module                  
-github.com/Azure/azure-sdk-for-go/sdk/storage/azblob                                 v1.4.1                                 go-module                  
+github.com/Azure/azure-sdk-for-go/sdk/storage/azblob                                 v1.5.0                                 go-module                  
 github.com/Azure/azure-sdk-for-go/sdk/storage/azfile                                 v1.2.2                                 go-module                  
 github.com/Azure/go-ntlmssp                                                          v0.0.0-20221128193559-754e69321358     go-module                  
 github.com/AzureAD/microsoft-authentication-library-for-go                           v1.2.2                                 go-module  (+1 duplicate)  
@@ -152,11 +152,11 @@ github.com/google/uuid                                                          
 github.com/googleapis/enterprise-certificate-proxy                                   v0.3.2                                 go-module                  
 github.com/googleapis/enterprise-certificate-proxy                                   v0.3.4                                 go-module                  
 github.com/googleapis/gax-go/v2                                                      v2.12.5                                go-module                  
-github.com/googleapis/gax-go/v2                                                      v2.13.0                                go-module                  
+github.com/googleapis/gax-go/v2                                                      v2.14.0                                go-module                  
 github.com/gorilla/mux                                                               v1.8.1                                 go-module                  
 github.com/grpc-ecosystem/grpc-gateway/v2                                            v2.23.0                                go-module                  
 github.com/hanwen/go-fuse/v2                                                         v2.5.1                                 go-module                  
-github.com/hanwen/go-fuse/v2                                                         v2.6.3                                 go-module                  
+github.com/hanwen/go-fuse/v2                                                         v2.6.4                                 go-module                  
 github.com/hashicorp/cronexpr                                                        v1.1.2                                 go-module                  
 github.com/hashicorp/errwrap                                                         v1.1.0                                 go-module                  
 github.com/hashicorp/go-cleanhttp                                                    v0.5.2                                 go-module                  
@@ -182,8 +182,8 @@ github.com/klauspost/pgzip                                                      
 github.com/klauspost/reedsolomon                                                     v1.12.4                                go-module                  
 github.com/koofr/go-httpclient                                                       v0.0.0-20240520111329-e20f8f203988     go-module                  
 github.com/koofr/go-koofrclient                                                      v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                  
-github.com/kopia/htmluibuild                                                         v0.0.1-0.20241105060252-108f70b353de   go-module                  
-github.com/kopia/kopia                                                               v20241117.0.0-                         go-module                  
+github.com/kopia/htmluibuild                                                         v0.0.1-0.20241119233831-fde0bf2a4817   go-module                  
+github.com/kopia/kopia                                                               v20241121.0.0-                         go-module                  
 github.com/kr/fs                                                                     v0.1.0                                 go-module  (+1 duplicate)  
 github.com/kylelemons/godebug                                                        v1.1.0                                 go-module  (+1 duplicate)  
 github.com/lpar/date                                                                 v1.0.0                                 go-module                  
@@ -292,10 +292,10 @@ golang.org/x/term                                                               
 golang.org/x/text                                                                    v0.17.0                                go-module                  
 golang.org/x/text                                                                    v0.20.0                                go-module                  
 golang.org/x/time                                                                    v0.5.0                                 go-module                  
-golang.org/x/time                                                                    v0.7.0                                 go-module                  
+golang.org/x/time                                                                    v0.8.0                                 go-module                  
 google.golang.org/api                                                                v0.188.0                               go-module                  
-google.golang.org/api                                                                v0.205.0                               go-module                  
-google.golang.org/genproto                                                           v0.0.0-20241021214115-324edc3d5d38     go-module                  
+google.golang.org/api                                                                v0.206.0                               go-module                  
+google.golang.org/genproto                                                           v0.0.0-20241104194629-dd2ea8efbc28     go-module                  
 google.golang.org/genproto/googleapis/api                                            v0.0.0-20241104194629-dd2ea8efbc28     go-module                  
 google.golang.org/genproto/googleapis/rpc                                            v0.0.0-20240708141625-4ad9e859172b     go-module                  
 google.golang.org/genproto/googleapis/rpc                                            v0.0.0-20241104194629-dd2ea8efbc28     go-module                  
@@ -303,7 +303,7 @@ google.golang.org/grpc                                                          
 google.golang.org/grpc                                                               v1.68.0                                go-module                  
 google.golang.org/grpc/stats/opentelemetry                                           v0.0.0-20240907200651-3ffb98b2c93a     go-module                  
 google.golang.org/protobuf                                                           v1.34.2                                go-module                  
-google.golang.org/protobuf                                                           v1.35.1                                go-module                  
+google.golang.org/protobuf                                                           v1.35.2                                go-module                  
 gopkg.in/kothar/go-backblaze.v0                                                      v0.0.0-20210124194846-35409b867216     go-module                  
 gopkg.in/validator.v2                                                                v2.0.1                                 go-module                  
 gopkg.in/yaml.v2                                                                     v2.4.0                                 go-module                  
@@ -311,7 +311,7 @@ gopkg.in/yaml.v3                                                                
 jq                                                                                   1.7.1-r0                               apk                        
 libattr                                                                              2.5.2-r2                               apk                        
 libbsd                                                                               0.12.2-r0                              apk                        
-libcrypto3                                                                           3.3.2-r3                               apk                        
+libcrypto3                                                                           3.3.2-r4                               apk                        
 libcurl                                                                              8.11.0-r2                              apk                        
 libexpat                                                                             2.6.4-r0                               apk                        
 libidn2                                                                              2.3.7-r0                               apk                        
@@ -320,9 +320,9 @@ libmd                                                                           
 libncursesw                                                                          6.5_p20241006-r3                       apk                        
 libproc2                                                                             4.0.4-r2                               apk                        
 libpsl                                                                               0.21.5-r3                              apk                        
-libssl3                                                                              3.3.2-r3                               apk                        
+libssl3                                                                              3.3.2-r4                               apk                        
 libunistring                                                                         1.2-r0                                 apk                        
-libuuid                                                                              2.40.2-r3                              apk                        
+libuuid                                                                              2.40.2-r4                              apk                        
 linux-pam                                                                            1.6.1-r1                               apk                        
 moul.io/http2curl/v2                                                                 v2.3.0                                 go-module                  
 musl                                                                                 1.2.5-r6                               apk                        
@@ -331,7 +331,7 @@ ncurses-terminfo-base                                                           
 netcat-openbsd                                                                       1.226.1.1-r0                           apk                        
 nghttp2-libs                                                                         1.64.0-r0                              apk                        
 oniguruma                                                                            6.9.9-r0                               apk                        
-openssl                                                                              3.3.2-r3                               apk                        
+openssl                                                                              3.3.2-r4                               apk                        
 procps-ng                                                                            4.0.4-r2                               apk                        
 rclone                                                                               1.68.2-r0                              apk                        
 readline                                                                             8.2.13-r0                              apk                        
