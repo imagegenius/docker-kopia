@@ -183,7 +183,7 @@ github.com/klauspost/reedsolomon                                                
 github.com/koofr/go-httpclient                                                       v0.0.0-20240520111329-e20f8f203988     go-module                  
 github.com/koofr/go-koofrclient                                                      v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                  
 github.com/kopia/htmluibuild                                                         v0.0.1-0.20241119233831-fde0bf2a4817   go-module                  
-github.com/kopia/kopia                                                               v20241121.0.0-                         go-module                  
+github.com/kopia/kopia                                                               v20241123.0.0-                         go-module                  
 github.com/kr/fs                                                                     v0.1.0                                 go-module  (+1 duplicate)  
 github.com/kylelemons/godebug                                                        v1.1.0                                 go-module  (+1 duplicate)  
 github.com/lpar/date                                                                 v1.0.0                                 go-module                  
@@ -325,7 +325,7 @@ libunistring                                                                    
 libuuid                                                                              2.40.2-r4                              apk                        
 linux-pam                                                                            1.6.1-r1                               apk                        
 moul.io/http2curl/v2                                                                 v2.3.0                                 go-module                  
-musl                                                                                 1.2.5-r6                               apk                        
+musl                                                                                 1.2.5-r7                               apk                        
 musl-utils                                                                           1.2.5-r5                               apk                        
 ncurses-terminfo-base                                                                6.5_p20241006-r3                       apk                        
 netcat-openbsd                                                                       1.226.1.1-r0                           apk                        
