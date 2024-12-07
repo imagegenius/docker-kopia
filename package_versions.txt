@@ -183,7 +183,7 @@ github.com/klauspost/reedsolomon                                                
 github.com/koofr/go-httpclient                                                       v0.0.0-20240520111329-e20f8f203988     go-module                  
 github.com/koofr/go-koofrclient                                                      v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                  
 github.com/kopia/htmluibuild                                                         v0.0.1-0.20241119233831-fde0bf2a4817   go-module                  
-github.com/kopia/kopia                                                               v20241130.0.0-                         go-module                  
+github.com/kopia/kopia                                                               v20241207.0.0-                         go-module                  
 github.com/kr/fs                                                                     v0.1.0                                 go-module  (+1 duplicate)  
 github.com/kylelemons/godebug                                                        v1.1.0                                 go-module  (+1 duplicate)  
 github.com/lpar/date                                                                 v1.0.0                                 go-module                  
@@ -325,7 +325,7 @@ libunistring                                                                    
 libuuid                                                                              2.40.2-r4                              apk                        
 linux-pam                                                                            1.6.1-r1                               apk                        
 moul.io/http2curl/v2                                                                 v2.3.0                                 go-module                  
-musl                                                                                 1.2.5-r7                               apk                        
+musl                                                                                 1.2.5-r8                               apk                        
 musl-utils                                                                           1.2.5-r5                               apk                        
 ncurses-terminfo-base                                                                6.5_p20241006-r3                       apk                        
 netcat-openbsd                                                                       1.226.1.1-r0                           apk                        
@@ -341,7 +341,8 @@ skalibs-libs                                                                    
 sqlite                                                                               3.47.1-r0                              apk                        
 ssl_client                                                                           1.37.0-r7                              apk                        
 stdlib                                                                               go1.23.1                               go-module                  
-stdlib                                                                               go1.23.3                               go-module  (+1 duplicate)  
+stdlib                                                                               go1.23.3                               go-module                  
+stdlib                                                                               go1.23.4                               go-module                  
 storj.io/common                                                                      v0.0.0-20240812101423-26b53789c348     go-module                  
 storj.io/drpc                                                                        v0.0.35-0.20240709171858-0075ac871661  go-module                  
 storj.io/eventkit                                                                    v0.0.0-20240415002644-1d9596fee086     go-module                  
