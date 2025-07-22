@@ -32,7 +32,7 @@ curl                                                                            
 docker-cli                                                                           28.3.2-r0                              apk                         
 findutils                                                                            4.10.0-r0                              apk                         
 fuse                                                                                 2.9.9-r6                               apk                         
-fuse-common                                                                          3.17.2-r1                              apk                         
+fuse-common                                                                          3.17.3-r0                              apk                         
 github.com/Azure/azure-sdk-for-go/sdk/azcore                                         v1.18.0                                go-module                   
 github.com/Azure/azure-sdk-for-go/sdk/azcore                                         v1.18.1                                go-module                   
 github.com/Azure/azure-sdk-for-go/sdk/azidentity                                     v1.10.0                                go-module                   
@@ -180,7 +180,7 @@ github.com/klauspost/reedsolomon                                                
 github.com/koofr/go-httpclient                                                       v0.0.0-20240520111329-e20f8f203988     go-module                   
 github.com/koofr/go-koofrclient                                                      v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                   
 github.com/kopia/htmluibuild                                                         v0.0.1-0.20250607181534-77e0f3f9f557   go-module                   
-github.com/kopia/kopia                                                               v20250720.0.0-                         go-module                   
+github.com/kopia/kopia                                                               v20250722.0.0-                         go-module                   
 github.com/kr/fs                                                                     v0.1.0                                 go-module  (+1 duplicate)   
 github.com/kylelemons/godebug                                                        v1.1.0                                 go-module  (+1 duplicate)   
 github.com/lanrat/extsort                                                            v1.0.2                                 go-module                   
