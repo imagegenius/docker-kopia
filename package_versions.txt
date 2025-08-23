@@ -6,7 +6,7 @@ alpine-keys                                                                     
 apache2-utils                                                                        2.4.65-r0                              apk                        
 apk-tools                                                                            2.14.9-r3                              apk                        
 apr                                                                                  1.7.6-r0                               apk                        
-apr-util                                                                             1.6.3-r1                               apk                        
+apr-util                                                                             1.6.3-r2                               apk                        
 bash                                                                                 5.2.37-r0                              apk                        
 bazil.org/fuse                                                                       v0.0.0-20230120002735-62a210ff1fd5     go-module                  
 brotli-libs                                                                          1.1.0-r2                               apk                        
@@ -180,7 +180,7 @@ github.com/klauspost/reedsolomon                                                
 github.com/koofr/go-httpclient                                                       v0.0.0-20240520111329-e20f8f203988     go-module                  
 github.com/koofr/go-koofrclient                                                      v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                  
 github.com/kopia/htmluibuild                                                         v0.0.1-0.20250607181534-77e0f3f9f557   go-module                  
-github.com/kopia/kopia                                                               v20250816.0.0-                         go-module                  
+github.com/kopia/kopia                                                               v20250823.0.0-                         go-module                  
 github.com/kr/fs                                                                     v0.1.0                                 go-module  (+1 duplicate)  
 github.com/kylelemons/godebug                                                        v1.1.0                                 go-module  (+1 duplicate)  
 github.com/lanrat/extsort                                                            v1.0.2                                 go-module                  
@@ -319,10 +319,10 @@ libproc2                                                                        
 libpsl                                                                               0.21.5-r3                              apk                        
 libssl3                                                                              3.5.2-r0                               apk                        
 libunistring                                                                         1.3-r0                                 apk                        
-libuuid                                                                              2.41.1-r0                              apk                        
+libuuid                                                                              2.41.1-r1                              apk                        
 linux-pam                                                                            1.7.0-r4                               apk                        
 moul.io/http2curl/v2                                                                 v2.3.0                                 go-module                  
-musl                                                                                 1.2.5-r19                              apk                        
+musl                                                                                 1.2.5-r20                              apk                        
 musl-utils                                                                           1.2.5-r12                              apk                        
 ncurses-terminfo-base                                                                6.5_p20250503-r0                       apk                        
 netcat-openbsd                                                                       1.229.1-r0                             apk                        
