@@ -186,7 +186,7 @@ github.com/klauspost/reedsolomon                                                
 github.com/koofr/go-httpclient                                                       v0.0.0-20240520111329-e20f8f203988     go-module                  
 github.com/koofr/go-koofrclient                                                      v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                  
 github.com/kopia/htmluibuild                                                         v0.0.1-0.20250607181534-77e0f3f9f557   go-module                  
-github.com/kopia/kopia                                                               v20251014.0.0-                         go-module                  
+github.com/kopia/kopia                                                               v20251018.0.0-                         go-module                  
 github.com/kr/fs                                                                     v0.1.0                                 go-module  (+1 duplicate)  
 github.com/kylelemons/godebug                                                        v1.1.0                                 go-module  (+1 duplicate)  
 github.com/lanrat/extsort                                                            v1.4.0                                 go-module                  
@@ -329,7 +329,7 @@ libproc2                                                                        
 libpsl                                                                               0.21.5-r3                              apk                        
 libssl3                                                                              3.5.4-r0                               apk                        
 libunistring                                                                         1.3-r0                                 apk                        
-libuuid                                                                              2.41.1-r1                              apk                        
+libuuid                                                                              2.41.2-r0                              apk                        
 linux-pam                                                                            1.7.0-r4                               apk                        
 moul.io/http2curl/v2                                                                 v2.3.0                                 go-module                  
 musl                                                                                 1.2.5-r21                              apk                        
