@@ -122,7 +122,6 @@ github.com/emersion/go-vcard                                                    
 github.com/envoyproxy/go-control-plane/envoy                                         v1.35.0                                go-module                  
 github.com/envoyproxy/protoc-gen-validate                                            v1.2.1                                 go-module                  
 github.com/fatih/color                                                               v1.18.0                                go-module                  
-github.com/felixge/fgprof                                                            v0.9.3                                 go-module                  
 github.com/felixge/httpsnoop                                                         v1.0.4                                 go-module  (+1 duplicate)  
 github.com/flynn/noise                                                               v1.1.0                                 go-module                  
 github.com/foomo/htpasswd                                                            v0.0.0-20200116085101-e3a90e78da9c     go-module                  
@@ -149,7 +148,6 @@ github.com/gogo/protobuf                                                        
 github.com/golang-jwt/jwt/v4                                                         v4.5.2                                 go-module  (+1 duplicate)  
 github.com/golang-jwt/jwt/v5                                                         v5.3.0                                 go-module  (+1 duplicate)  
 github.com/golang/glog                                                               v1.2.5                                 go-module                  
-github.com/google/pprof                                                              v0.0.0-20230602150820-91b7bce49751     go-module                  
 github.com/google/readahead                                                          v0.0.0-20161222183148-eaceba169032     go-module                  
 github.com/google/s2a-go                                                             v0.1.9                                 go-module  (+1 duplicate)  
 github.com/google/uuid                                                               v1.6.0                                 go-module  (+1 duplicate)  
@@ -180,12 +178,11 @@ github.com/jlaffaye/ftp                                                         
 github.com/jtolio/noiseconn                                                          v0.0.0-20231127013910-f6d9ecbf1de7     go-module                  
 github.com/jzelinskie/whirlpool                                                      v0.0.0-20201016144138-0675e54bb004     go-module                  
 github.com/klauspost/compress                                                        v1.18.0                                go-module                  
-github.com/klauspost/compress                                                        v1.18.1                                go-module                  
-github.com/klauspost/cpuid/v2                                                        v2.2.11                                go-module                  
-github.com/klauspost/cpuid/v2                                                        v2.3.0                                 go-module                  
+github.com/klauspost/compress                                                        v1.18.2                                go-module                  
+github.com/klauspost/cpuid/v2                                                        v2.3.0                                 go-module  (+1 duplicate)  
 github.com/klauspost/crc32                                                           v1.3.0                                 go-module                  
 github.com/klauspost/pgzip                                                           v1.2.6                                 go-module                  
-github.com/klauspost/reedsolomon                                                     v1.12.5                                go-module                  
+github.com/klauspost/reedsolomon                                                     v1.12.6                                go-module                  
 github.com/koofr/go-httpclient                                                       v0.0.0-20240520111329-e20f8f203988     go-module                  
 github.com/koofr/go-koofrclient                                                      v0.0.0-20221207135200-cbd7fc9ad6a6     go-module                  
 github.com/kopia/htmluibuild                                                         v0.0.1-0.20251125011029-7f1c3f84f29d   go-module                  
@@ -220,7 +217,6 @@ github.com/philhofer/fwd                                                        
 github.com/pierrec/lz4                                                               v2.6.1+incompatible                    go-module                  
 github.com/pkg/browser                                                               v0.0.0-20240102092130-5ac0b6a4141c     go-module  (+1 duplicate)  
 github.com/pkg/errors                                                                v0.9.1                                 go-module  (+1 duplicate)  
-github.com/pkg/profile                                                               v1.7.0                                 go-module                  
 github.com/pkg/sftp                                                                  v1.13.10                               go-module                  
 github.com/pkg/sftp                                                                  v1.13.9                                go-module                  
 github.com/pkg/xattr                                                                 v0.4.12                                go-module                  
@@ -359,10 +355,11 @@ scanelf                                                                         
 shadow                                                                               4.17.3-r0                              apk                        
 sigs.k8s.io/yaml                                                                     v1.6.0                                 go-module                  
 skalibs-libs                                                                         2.14.4.0-r0                            apk                        
-sqlite                                                                               3.51.0-r0                              apk                        
+sqlite                                                                               3.51.1-r0                              apk                        
 ssl_client                                                                           1.37.0-r18                             apk                        
 stdlib                                                                               go1.25.2                               go-module                  
-stdlib                                                                               go1.25.3                               go-module  (+1 duplicate)  
+stdlib                                                                               go1.25.3                               go-module                  
+stdlib                                                                               go1.25.4                               go-module                  
 storj.io/common                                                                      v0.0.0-20250808122759-804533d519c1     go-module                  
 storj.io/drpc                                                                        v0.0.35-0.20250513201419-f7819ea69b55  go-module                  
 storj.io/eventkit                                                                    v0.0.0-20250410172343-61f26d3de156     go-module                  
