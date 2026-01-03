@@ -34,7 +34,7 @@ curl                                                                            
 docker-cli                                                                           29.1.3-r0                              apk                         
 findutils                                                                            4.10.0-r0                              apk                         
 fuse                                                                                 2.9.9-r7                               apk                         
-fuse-common                                                                          3.17.3-r1                              apk                         
+fuse-common                                                                          3.18.1-r0                              apk                         
 github.com/Azure/azure-sdk-for-go/sdk/azcore                                         v1.18.2                                go-module                   
 github.com/Azure/azure-sdk-for-go/sdk/azcore                                         v1.20.0                                go-module                   
 github.com/Azure/azure-sdk-for-go/sdk/azidentity                                     v1.11.0                                go-module                   
