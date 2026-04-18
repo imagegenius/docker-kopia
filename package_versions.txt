@@ -355,7 +355,7 @@ scanelf                                                                         
 shadow                                                                               4.17.3-r0                              apk                         
 sigs.k8s.io/yaml                                                                     v1.6.0                                 go-module                   
 skalibs-libs                                                                         2.14.4.0-r0                            apk                         
-sqlite                                                                               3.51.2-r1                              apk                         
+sqlite                                                                               3.53.0-r0                              apk                         
 ssl_client                                                                           1.37.0-r18                             apk                         
 stdlib                                                                               go1.26.2                               go-module  (+2 duplicates)  
 storj.io/common                                                                      v0.0.0-20251107171817-6221ae45072c     go-module                   
