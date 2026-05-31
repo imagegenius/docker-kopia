@@ -1,14 +1,18 @@
-FROM ghcr.io/imagegenius/baseimage-alpine:edge
+# syntax=docker/dockerfile:1
+# check=skip=InvalidDefaultArgInFrom
+
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
 
 # set version label
-ARG BUILD_DATE
+ARG TARGETARCH
 ARG VERSION
-ARG KOPIA_VERSION
-LABEL build_version="ImageGenius Version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydazz"
+LABEL org.opencontainers.image.authors="hydazz"
 
 # environment settings
-ENV KOPIA_CONFIG_PATH=/config/repository.config \
+ENV \
+  KOPIA_CONFIG_PATH=/config/repository.config \
   KOPIA_LOG_DIR=/config/log \
   KOPIA_CACHE_DIRECTORY=/cache \
   RCLONE_CONFIG=/config/rclone.conf \
@@ -16,13 +20,10 @@ ENV KOPIA_CONFIG_PATH=/config/repository.config \
   KOPIA_CHECK_FOR_UPDATES=false
 
 RUN \
-  echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
-    go \
-    make && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
     apache2-utils \
+    curl \
     docker-cli \
     findutils \
     fuse \
@@ -30,30 +31,15 @@ RUN \
     rclone \
     sqlite && \
   echo "**** download kopia ****" && \
-  mkdir -p \
-    /tmp/kopia && \
-  if [ -z ${KOPIA_VERSION} ]; then \
-    KOPIA_VERSION=$(curl -sL https://api.github.com/repos/kopia/kopia/releases/latest | \
-      jq -r '.tag_name'); \
+  KOPIA_ARCH="${TARGETARCH}" && \
+  if [ "${KOPIA_ARCH}" = "amd64" ]; then \
+    KOPIA_ARCH="x64"; \
   fi && \
-  curl -o \
-    /tmp/kopia.tar.gz -L \
-    "https://github.com/kopia/kopia/archive/${KOPIA_VERSION}/kopia-${KOPIA_VERSION}.tar.gz" && \
-  tar xf \
-    /tmp/kopia.tar.gz -C \
-    /tmp/kopia --strip-components=1 && \
-  echo "**** install kopia ****" && \
-  cd /tmp/kopia && \
-  make install && \
-  mv \
-    /root/go/bin/kopia \
-    /usr/local/bin/kopia && \
+  curl -fsSL "https://github.com/kopia/kopia/releases/download/${VERSION}/kopia-${VERSION#v}-linux-${KOPIA_ARCH}.tar.gz" | \
+    tar xzf - -C /usr/local/bin --strip-components 1 && \
   echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
   rm -rf \
     /tmp/* \
-    /root/go/ \
     /root/.cache
 
 # copy local files
