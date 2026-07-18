@@ -1,0 +1,33 @@
+[settings]
+experimental = true
+unix_default_inline_shell_args = "bash -c -o errexit -o pipefail -o nounset"
+
+[tools]
+gh = "2.96.0"
+go = "1.26.5"
+hadolint = "2.14.0"
+jq = "1.8.2"
+lefthook = "2.1.10"
+node = "26.5.0"
+oxfmt = "0.59.0"
+regctl = "0.11.5"
+shellcheck = "0.11.0"
+yq = "4.53.3"
+zizmor = "1.27.0"
+
+[tasks.local-build]
+description = "Build and test locally"
+run = '''
+docker buildx bake --no-cache --metadata-file .cache/docker-bake.json --set=*.output=type=docker --load image-local
+TEST_IMAGE="$(jq -r '."image-local"."image.name" | sub("^docker.io/library/"; "")' .cache/docker-bake.json)" go test -v ./tests/...
+'''
+
+[tasks.remote-build]
+description = "Trigger a remote build"
+usage = '''
+arg "[release]" help="release flag (default: false)"
+'''
+run = 'gh workflow run release.yaml -f release="${usage_release:-false}"'
+
+[hooks]
+postinstall = ["mkdir -p {{config_root}}/.cache", "lefthook install"]
