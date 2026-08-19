@@ -1,16 +1,14 @@
 package main
 
 import (
-	"context"
 	"testing"
 
-	"github.com/imagegenius/docker-kopia/tests/testhelpers"
+	helpers "github.com/hydazz/containers/tests"
 )
 
 func Test(t *testing.T) {
-	ctx := context.Background()
-	image := testhelpers.GetTestImage("kopia:local")
+	image := helpers.GetTestImage("kopia:local")
 	t.Logf("testing image: %s", image)
 
-	testhelpers.TestCommandSucceeds(t, ctx, image, nil, "/usr/local/bin/kopia", "--version")
+	helpers.RequireCommandSucceeds(t, image, nil, "/usr/local/bin/kopia", "--version")
 }
