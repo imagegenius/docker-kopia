@@ -15,10 +15,6 @@
   ],
   packageRules: [
     {
-      matchManagers: ["mise"],
-      minimumReleaseAge: "12 hours",
-    },
-    {
       description: ["Release Rules for Image Updates"],
       commitMessageExtra: "( {{currentVersion}} → {{newVersion}} )",
       commitMessageTopic: "{{depName}}",
