@@ -30,7 +30,7 @@ jobs:
           persist-credentials: false
 
       - name: Get Bake Vars
-        uses: ./.github/actions/bake-vars
+        uses: $/.github/actions/bake-vars
         id: opts
 
       - name: Build Image Metadata
@@ -247,6 +247,8 @@ jobs:
         uses: anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26 # v0.24.2
         with:
           dependency-snapshot: true
+          registry-username: ${{ github.actor }}
+          registry-password: ${{ github.token }}
           image: ghcr.io/${{ github.repository_owner }}/${{ needs.plan.outputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Attestation
