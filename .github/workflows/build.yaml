@@ -14,149 +14,14 @@ permissions:
   contents: read
 
 jobs:
-  plan:
-    name: Plan
-    runs-on: ubuntu-26.04
-    permissions:
-      contents: read
-    outputs:
-      app: ${{ steps.opts.outputs.app }}
-      platforms: ${{ steps.opts.outputs.platforms }}
-      version: ${{ steps.opts.outputs.version }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
-      - name: Get Bake Vars
-        uses: $/.github/actions/bake-vars
-        id: opts
-
-      - name: Build Image Metadata
-        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
-        id: meta
-        env:
-          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
-        with:
-          images: ghcr.io/${{ github.repository_owner }}/${{ steps.opts.outputs.app }}
-          flavor: latest=false
-          tags: |
-            type=raw,value=latest,enable=${{ inputs.release }}
-            type=raw,value=${{ steps.opts.outputs.version }},enable=${{ inputs.release }}
-            type=raw,value=sandbox,enable=${{ ! inputs.release }}
-
-      - name: Upload Bake Metadata
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: bake-metadata
-          path: ${{ steps.meta.outputs.bake-file }}
-          if-no-files-found: error
-          retention-days: 1
-
   build:
-    name: Build (${{ matrix.platform }})
-    needs:
-      - plan
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: ${{ fromJson(needs.plan.outputs.platforms) }}
-    runs-on: ${{ startsWith(matrix.platform, 'linux/arm') && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
+    name: Build
+    uses: $/.github/workflows/build-image.yaml
     permissions:
       contents: read
       packages: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
-      - name: Get Target Architecture
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        id: target
-        env:
-          PLATFORM: ${{ matrix.platform }}
-        with:
-          script: |-
-            core.setOutput('arch', process.env.PLATFORM.split('/').pop());
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
-
-      - name: Download Bake Metadata
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          name: bake-metadata
-          path: ${{ runner.temp }}
-
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
-
-      - name: Build Image
-        uses: docker/bake-action@018cb6412ab401ebaa809aa5f85966b74628600f # v7.4.0
-        id: bake
-        with:
-          files: |
-            ./docker-bake.hcl
-            cwd://${{ runner.temp }}/docker-metadata-action-bake.json
-          targets: image
-          provenance: false
-          set: |
-            *.platform=${{ matrix.platform }}
-            *.cache-from=${{ format('type=registry,ref=ghcr.io/{0}/{1}-cache:{2}', github.repository_owner, needs.plan.outputs.app, steps.target.outputs.arch) }}
-            *.cache-to=${{ inputs.release && format('type=registry,ref=ghcr.io/{0}/{1}-cache:{2},mode=max,compression=zstd,force-compression=true', github.repository_owner, needs.plan.outputs.app, steps.target.outputs.arch) || '' }}
-            *.labels.org.opencontainers.image.title=${{ needs.plan.outputs.app }}
-            *.labels.org.opencontainers.image.version=${{ needs.plan.outputs.version }}
-            *.labels.org.opencontainers.image.revision=${{ github.sha }}
-            *.labels.org.opencontainers.image.vendor=${{ github.repository_owner }}
-            *.output=${{ inputs.release && format('type=image,name=ghcr.io/{0}/{1},push-by-digest=true,name-canonical=true,push=true,compression=zstd,force-compression=true', github.repository_owner, needs.plan.outputs.app) || 'type=docker' }}
-            *.tags=${{ ! inputs.release && format('{0}:sandbox', needs.plan.outputs.app) || '' }}
-
-      - name: Export Digest
-        if: ${{ inputs.release }}
-        env:
-          METADATA: ${{ steps.bake.outputs.metadata }}
-        run: |-
-          mkdir -p ${{ runner.temp }}/digests
-          DIGEST=$(jq -r '.image["containerimage.digest"]' <<<"$METADATA")
-          test -n "$DIGEST" || { echo "::error::bake metadata had no digest"; jq . <<<"$METADATA"; exit 1; }
-          touch "${{ runner.temp }}/digests/${DIGEST#sha256:}"
-
-      - name: Upload Digest
-        if: ${{ inputs.release }}
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: digests-${{ steps.target.outputs.arch }}
-          path: ${{ runner.temp }}/digests/*
-          if-no-files-found: error
-          retention-days: 1
-
-      - name: Setup Mise
-        if: ${{ ! inputs.release }}
-        uses: jdx/mise-action@2d8d4cafcbd33be2ea37d2b6f5ad595363d1f1ca # v5.1.1
-        with:
-          experimental: true
-          install_args: --locked
-
-      - name: Restore Go Modules
-        if: ${{ ! inputs.release }}
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('go.sum') }}
-
-      - name: Run Tests
-        if: ${{ ! inputs.release }}
-        env:
-          TEST_IMAGE: ${{ needs.plan.outputs.app }}:sandbox
-        run: go test -v -timeout 15m ./tests/...
+    with:
+      release: ${{ inputs.release }}
 
   merge:
     if: ${{ inputs.release }}
@@ -166,7 +31,6 @@ jobs:
       contents: read
       packages: write
     needs:
-      - plan
       - build
     outputs:
       digest: ${{ steps.digest.outputs.digest }}
@@ -194,7 +58,7 @@ jobs:
       - name: Create Manifest List and Push
         working-directory: ${{ runner.temp }}/digests
         env:
-          APP: ${{ needs.plan.outputs.app }}
+          APP: ${{ needs.build.outputs.app }}
           OWNER: ${{ github.repository_owner }}
           META: ${{ runner.temp }}/docker-metadata-action-bake.json
         run: |-
@@ -205,7 +69,7 @@ jobs:
 
       - name: Inspect Image
         env:
-          APP: ${{ needs.plan.outputs.app }}
+          APP: ${{ needs.build.outputs.app }}
           OWNER: ${{ github.repository_owner }}
           META: ${{ runner.temp }}/docker-metadata-action-bake.json
         run: |-
@@ -215,7 +79,7 @@ jobs:
       - name: Export Digest
         id: digest
         env:
-          APP: ${{ needs.plan.outputs.app }}
+          APP: ${{ needs.build.outputs.app }}
           OWNER: ${{ github.repository_owner }}
           META: ${{ runner.temp }}/docker-metadata-action-bake.json
         run: |-
@@ -227,7 +91,7 @@ jobs:
     if: ${{ inputs.release }}
     name: Attest
     needs:
-      - plan
+      - build
       - merge
     runs-on: ubuntu-26.04
     permissions:
@@ -251,18 +115,18 @@ jobs:
           dependency-snapshot: true
           registry-username: ${{ github.actor }}
           registry-password: ${{ github.token }}
-          image: ghcr.io/${{ github.repository_owner }}/${{ needs.plan.outputs.app }}@${{ needs.merge.outputs.digest }}
+          image: ghcr.io/${{ github.repository_owner }}/${{ needs.build.outputs.app }}@${{ needs.merge.outputs.digest }}
 
       - name: Attestation
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
         with:
           push-to-registry: true
-          subject-name: ghcr.io/${{ github.repository_owner }}/${{ needs.plan.outputs.app }}
+          subject-name: ghcr.io/${{ github.repository_owner }}/${{ needs.build.outputs.app }}
           subject-digest: ${{ needs.merge.outputs.digest }}
 
       - name: Verify Attestation
         env:
-          APP: ${{ needs.plan.outputs.app }}
+          APP: ${{ needs.build.outputs.app }}
           DIGEST: ${{ needs.merge.outputs.digest }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
