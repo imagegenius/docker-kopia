@@ -26,7 +26,7 @@ concurrency:
 jobs:
   build:
     name: Image
-    uses: ./.github/workflows/build.yaml
+    uses: $/.github/workflows/build.yaml
     permissions:
       artifact-metadata: write
       attestations: write
