@@ -27,6 +27,7 @@ jobs:
     if: ${{ inputs.release }}
     name: Merge
     runs-on: ubuntu-26.04
+    timeout-minutes: 15
     permissions:
       contents: read
       packages: write
@@ -94,6 +95,7 @@ jobs:
       - build
       - merge
     runs-on: ubuntu-26.04
+    timeout-minutes: 15
     permissions:
       attestations: write
       contents: read
