@@ -19,18 +19,21 @@ shellcheck = "0.11.0"
 yq = "4.54.1"
 
 [tasks.local-build]
-description = "Build and test locally"
+description = "Build and test the image"
 run = '''
-docker buildx bake --no-cache --metadata-file .cache/docker-bake.json --set=*.output=type=docker --load image-local
-TEST_IMAGE="$(jq -r '."image-local"."image.name" | sub("^docker.io/library/"; "")' .cache/docker-bake.json)" go test -v ./tests/...
+metadata=$(mktemp)
+trap 'rm -f "$metadata"' EXIT
+docker buildx bake --no-cache --metadata-file "$metadata" --load image-local
+image=$(jq -er '."image-local"."image.name" | sub("^docker.io/library/"; "")' "$metadata")
+TEST_IMAGE="$image" go test -v ./tests/...
 '''
 
 [tasks.remote-build]
-description = "Trigger a remote build"
+description = "Start the GitHub release workflow"
 usage = '''
-arg "[release]" help="release flag (default: false)"
+flag "--release" help="Publish the image"
 '''
 run = 'gh workflow run release.yaml -f release="${usage_release:-false}"'
 
 [hooks]
-postinstall = ["mkdir -p {{config_root}}/.cache", "lefthook install"]
+postinstall = "lefthook install"
