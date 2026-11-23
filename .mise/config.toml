@@ -19,7 +19,6 @@ shellcheck = "0.11.0"
 yq = "4.54.3"
 
 [tasks.local-build]
-description = "Build and test the image"
 run = '''
 metadata=$(mktemp)
 trap 'rm -f "$metadata"' EXIT
@@ -29,7 +28,6 @@ TEST_IMAGE="$image" go test -v ./tests/...
 '''
 
 [tasks.remote-build]
-description = "Start the GitHub release workflow"
 usage = '''
 flag "--release" help="Publish the image"
 '''
